@@ -4,14 +4,151 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hardcover Foundation</title>
+  <meta name="description" content="Uniting communities through the power of literature. Launching Summer 2025."/>
+  <link rel="canonical" href="https://hardcoverfoundation.org/"/>
+
+  <!-- Favicons & Touch Icons (from /assets/) -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="/assets/favicon-96x96.png" sizes="96x96" type="image/png"/>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet"/>
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:title"       content="Hardcover Foundation"/>
+  <meta property="og:description" content="Uniting communities through the transformative power of literature. Launching Summer 2025."/>
+  <meta property="og:image"       content="https://hardcoverfoundation.org/assets/hardcover-logo.png"/>
+  <meta property="og:url"         content="https://hardcoverfoundation.org/"/>
+  <meta property="og:type"        content="website"/>
+  <meta name="twitter:card"       content="summary_large_image"/>
+  <meta name="twitter:image"      content="https://hardcoverfoundation.org/assets/hardcover-logo.png"/>
+
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 5em; }
-    a { color: #0066cc; text-decoration: none; }
+    :root {
+      --brand-color: #0066cc;
+      --bg-light: #f9f9f9;
+      --text-dark: #333;
+      --text-mid: #555;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+    header {
+      text-align: center;
+      padding: 4em 1em 2em;
+    }
+    .logo {
+      max-width: 180px;
+      margin: 0 auto 1em;
+      display: block;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
+      color: var(--text-dark);
+    }
+    .tagline {
+      font-size: 1.1em;
+      color: var(--text-mid);
+      margin-bottom: 1em;
+    }
+    #countdown {
+      font-size: 1.1em;
+      color: var(--text-mid);
+      margin-bottom: 2em;
+    }
+    section {
+      max-width: 700px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      margin-bottom: 0.5em;
+      color: var(--brand-color);
+    }
+    section p {
+      margin-bottom: 1em;
+      color: var(--text-mid);
+    }
+    footer {
+      text-align: center;
+      padding: 2em 1em;
+      font-size: 0.9em;
+      color: var(--text-mid);
+    }
+    footer a {
+      color: var(--brand-color);
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
-  <h1>Hardcover Foundation</h1>
-  <p>Coming Soon – launching Summer 2025 </p>
-  <p>Contact: <a href="mailto:admin@hardcoverfoundation.org">admin@hardcoverfoundation.org</a></p>
+
+  <header>
+    <img src="/assets/hardcover-logo.png" alt="Hardcover Foundation logo" class="logo"/>
+    <h1>📘 The Hardcover Foundation</h1>
+    <p class="tagline">The Legacy. The Lyrics. The Lift.</p>
+    <p id="countdown"></p>
+  </header>
+
+  <section id="about">
+    <h2>What is The Hardcover Foundation?</h2>
+    <p>
+      The Hardcover Foundation is a nonprofit organization founded by Grammy Award-winning songwriter Harold Lilly Jr., inspired by a heartfelt conversation with his best friend about purpose and platform. That moment sparked a shared vision: to use Harold’s creative legacy as a launching pad for something greater than music—something rooted in impact, education, cultural preservation, and empowerment.
+    </p>
+    <p>
+      The Foundation exists to preserve stories, elevate voices, and empower youth and communities through literacy, creativity, and legacy-building programs. From reading initiatives and writing workshops to boot camps and cultural partnerships, the Hardcover Foundation serves as a home for those ready to own their story and build a future through it.
+    </p>
+    <p>
+      <em>Hardcover</em> represents more than durability—it reflects intentionality, depth, and lasting impact. Like a hardcover book, this foundation was built to last, uplift, and be passed on.
+    </p>
+  </section>
+
+  <section id="mission">
+    <h2>🔑 Our Mission</h2>
+    <p>
+      The Hardcover Foundation is committed to uniting our communities through the power of literature—whether written, visual, oral, or expressed through physical movement. We believe literature is a body of work that transmits culture, which ultimately becomes living literature.
+    </p>
+    <p>
+      We empower young people and communities through storytelling, literacy, mentorship, and creative programming—turning platforms into purpose and passion into impact.
+    </p>
+  </section>
+
+  <section id="vision">
+    <h2>🌟 Our Vision</h2>
+    <p>
+      To build a diverse, connected community where literature empowers individuals to navigate life, grow together, and reach their full potential.
+      Through literacy and learning, we foster empathy, critical thinking, and shared purpose—laying the foundation for both personal and collective growth.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      Contact us at  
+      <a href="mailto:info@hardcoverfoundation.org">info@hardcoverfoundation.org</a>
+    </p>
+  </footer>
+
+  <script>
+    // Countdown Timer (updates hourly)
+    const launchDate = new Date("2025-09-01T00:00:00").getTime();
+    setInterval(() => {
+      const diff = launchDate - Date.now();
+      if (diff < 0) return;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("countdown")
+              .textContent = `${days} days until we go live!`;
+    }, 1000 * 60 * 60);
+  </script>
+
 </body>
 </html>
