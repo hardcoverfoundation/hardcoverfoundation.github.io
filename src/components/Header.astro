@@ -1,0 +1,40 @@
+---
+const navItems = [
+  { href: '/programs', label: 'Programs' },
+  { href: '/stories', label: 'Stories' },
+  { href: '/news', label: 'News' },
+  { href: '/team', label: 'Team' },
+] as const;
+---
+
+<header class="border-rule-on-paper bg-paper border-b">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+    <a href="/" class="font-display text-ink text-xl tracking-tight no-underline">
+      Hardcover <span class="text-cobalt">Foundation</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="flex items-center gap-6 text-sm">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-ink/80 decoration-ink/30 hover:decoration-ink no-underline hover:underline"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a
+            href="/give"
+            class="bg-copper hover:bg-copper-deep text-paper rounded-sm px-4 py-2 no-underline transition-colors"
+          >
+            Give
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

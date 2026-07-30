@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const programs = (await getCollection('programs')).sort((a, b) => a.data.chapterNumber - b.data.chapterNumber);
+---
+
+<BaseLayout title="Home">
+  <section class="mx-auto max-w-3xl px-6 py-20">
+    <h1 class="font-display text-ink text-4xl sm:text-5xl">Living libraries, chosen by the kids who read them.</h1>
+    <p class="text-ink/80 mt-6 text-lg">
+      Hardcover Foundation opens chapters that put real book choice — and the time to use it — into classrooms
+      that need it most.
+    </p>
+  </section>
+
+  <section class="border-rule-on-paper mx-auto max-w-3xl border-t px-6 py-16">
+    <h2 class="font-display text-ink text-2xl">Chapters</h2>
+    <ul class="mt-6 space-y-6">
+      {
+        programs.map((program) => (
+          <li>
+            <a href={`/programs/${program.id}`} class="text-ink no-underline">
+              <p class="text-copper text-sm tracking-widest uppercase">Chapter {program.data.chapterNumber}</p>
+              <p class="font-display mt-1 text-xl">{program.data.title}</p>
+              <p class="text-ink/70 mt-1">{program.data.purpose}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

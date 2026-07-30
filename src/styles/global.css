@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Map raw design tokens into Tailwind's theme so utilities like
+   bg-paper, text-ink, text-cobalt, bg-copper, font-display exist. */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-deep: var(--cobalt-deep);
+  --color-copper: var(--copper);
+  --color-copper-deep: var(--copper-deep);
+  --color-rule-on-paper: var(--rule-on-paper);
+  --color-rule-on-ink: var(--rule-on-ink);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-normal tracking-tight text-balance;
+  }
+
+  a {
+    @apply text-cobalt decoration-cobalt/40 underline underline-offset-4 transition-colors hover:decoration-cobalt;
+  }
+
+  hr {
+    @apply border-rule-on-paper;
+  }
+}

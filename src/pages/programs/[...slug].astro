@@ -1,0 +1,54 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const programs = await getCollection('programs');
+  return programs.map((program) => ({
+    params: { slug: program.id },
+    props: { program },
+  }));
+}
+
+interface Props {
+  program: CollectionEntry<'programs'>;
+}
+
+const { program } = Astro.props;
+const { data } = program;
+const { Content } = await render(program);
+---
+
+<BaseLayout title={data.title} description={data.description ?? data.purpose}>
+  <article class="mx-auto max-w-3xl px-6 py-16">
+    <p class="text-copper font-body text-sm tracking-widest uppercase">Chapter {data.chapterNumber}</p>
+    <h1 class="font-display text-ink mt-2 text-4xl">{data.title}</h1>
+    <p class="text-ink/80 mt-6 text-lg">{data.purpose}</p>
+
+    <section class="mt-10">
+      <h2 class="font-display text-ink text-2xl">Outcomes</h2>
+      <ul class="text-ink/80 mt-4 space-y-2">
+        {data.outcomes.map((outcome) => <li>— {outcome}</li>)}
+      </ul>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="font-display text-ink text-2xl">Who it's for</h2>
+      <p class="text-ink/80 mt-4">{data.audience}</p>
+    </section>
+
+    <div class="border-rule-on-paper mt-12 border-t pt-8">
+      <p class="text-ink/80">{data.sponsorCall}</p>
+      <a
+        href="/give"
+        class="bg-copper hover:bg-copper-deep text-paper mt-4 inline-block rounded-sm px-5 py-3 no-underline"
+      >
+        Sponsor this chapter
+      </a>
+    </div>
+
+    <div class="prose mt-12 max-w-none">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,32 @@
+/*
+  Design tokens for the "living literature" editorial system.
+  Raw values live here, independent of Tailwind, so they can be
+  consumed by any component or eventually re-themed (e.g. dark mode)
+  without touching global.css's Tailwind wiring.
+*/
+:root {
+  /* Ground */
+  --ink: #12161a; /* background-ink: charcoal */
+  --ink-soft: #262b31; /* raised surfaces on ink */
+  --paper: #fbf9f5; /* paper-warm: cream ivory */
+  --paper-dim: #f0ebe0; /* raised surfaces on paper */
+
+  /* Accents */
+  --cobalt: #1e4fd8; /* primary accent: links, active state */
+  --cobalt-deep: #15379c; /* hover/pressed */
+  --copper: #bf5b2e; /* call-to-action: burnt orange copper */
+  --copper-deep: #954726; /* hover/pressed */
+
+  /* Rule lines & dividers */
+  --rule-on-paper: rgba(18, 22, 26, 0.14);
+  --rule-on-ink: rgba(251, 249, 245, 0.18);
+
+  /* Type */
+  --font-display: 'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Rhythm */
+  --measure: 66ch;
+  --radius: 2px;
+  --ease-editorial: cubic-bezier(0.65, 0, 0.35, 1);
+}
