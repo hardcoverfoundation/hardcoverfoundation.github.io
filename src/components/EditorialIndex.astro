@@ -1,0 +1,41 @@
+---
+interface IndexItem {
+  label: string;
+  description?: string;
+}
+
+interface Props {
+  items: IndexItem[];
+  layout?: "progression" | "tags";
+}
+
+const { items, layout = "progression" } = Astro.props;
+---
+
+{
+  layout === "progression" ? (
+    <ol class="flex flex-col divide-y divide-ink/10 border-y border-ink/10 md:flex-row md:divide-x md:divide-y-0">
+      {items.map((item, i) => (
+        <li class="flex-1 py-6 md:px-6 md:py-2">
+          <span class="font-display text-sm text-copper-deep">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <p class="mt-2 font-display text-lg text-ink">{item.label}</p>
+          {item.description && (
+            <p class="mt-1 text-sm text-ink/70">{item.description}</p>
+          )}
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <ul class="flex flex-wrap gap-3">
+      {items.map((item) => (
+        <li>
+          <span class="inline-block rounded-full border border-ink/15 px-4 py-2 text-sm text-ink/80">
+            {item.label}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}

@@ -1,0 +1,29 @@
+---
+interface Props {
+  quote: string;
+  cite?: string;
+  class?: string;
+  tone?: "ink" | "paper";
+}
+
+const { quote, cite, class: className = "", tone = "paper" } = Astro.props;
+---
+
+<blockquote
+  class:list={[
+    "font-display text-2xl leading-snug md:text-3xl",
+    tone === "ink" ? "text-paper" : "text-ink",
+    className,
+  ]}
+>
+  <p>{quote}</p>
+  {
+    cite && (
+      <cite
+        class={`mt-4 block text-sm not-italic ${tone === "ink" ? "text-paper/60" : "text-ink/60"}`}
+      >
+        {cite}
+      </cite>
+    )
+  }
+</blockquote>

@@ -1,0 +1,36 @@
+/*
+  Provisional Phase 1 palette (design-plan.md §3).
+  Not final: exact hex values are pending the logo-lockup discrepancy
+  resolution described in design-plan.md §1. Do not treat as permanently
+  approved brand color.
+
+  Contrast pairings below were checked (WCAG 2.2 AA, sRGB relative
+  luminance) rather than assumed:
+    --ink on --paper / --paper on --ink       ~19:1  (body text, both directions)
+    --cobalt on --paper                        6.3:1 (links — paper ground only)
+    --copper-deep fill + --paper text           6.2:1 (primary CTA)
+    --copper on --paper                         4.2:1 (large text / UI only, not body copy)
+    --gold on --paper                           3.7:1 (large text / UI only)
+    --gold on --ink                             4.6:1 (safe for body-size text on ink ground)
+    --cobalt on --ink                           2.7:1 (fails — do not use cobalt text on ink ground)
+  --gold is used as the universal focus-ring color because it clears the
+  3:1 non-text minimum against both --paper and --ink.
+*/
+
+:root {
+  --ink: #12161a;
+  --ink-soft: #262b31;
+  --paper: #fbf9f5;
+  --paper-dim: #f0ebe0;
+
+  --cobalt: #1e4fd8;
+  --cobalt-deep: #15379c;
+
+  --copper: #bf5b2e;
+  --copper-deep: #954726;
+
+  --gold: #9c7c3c;
+  --gold-soft: #c9ad74;
+
+  --focus-ring: var(--gold);
+}

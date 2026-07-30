@@ -1,0 +1,53 @@
+---
+import CtaBand from "./CtaBand.astro";
+import { donateUrl } from "../site.config";
+
+// Concept A, "The Index" (design-plan.md §7). Headline is the approved
+// core-distinction line verbatim (approved-messaging.md); the tagline is
+// Tier 3 proposed copy pending final leadership sign-off, shown as a
+// smaller sub-line rather than the headline itself. No photography
+// dependency; the right-hand list previews the expanded-literacy
+// progression below rather than asserting new content.
+const indexPreview = ["Identity", "Culture", "Systems", "Opportunity", "Self"];
+
+// "Support the Mission" is reserved for an actual donation action — it
+// links straight to the configured donation URL, not an in-page anchor.
+// Without one, the primary CTA points to general participation instead so
+// the label never promises a support action that isn't wired up.
+const heroCtaLabel = donateUrl ? "Support the Mission" : "Find Your Path";
+const heroCtaHref = donateUrl ?? "#get-involved";
+---
+
+<section class="bg-ink px-5 pb-16 pt-20 text-paper md:pt-28">
+  <div class="mx-auto grid max-w-6xl gap-12 md:grid-cols-3">
+    <div class="md:col-span-2">
+      <h1 class="font-display text-4xl font-semibold leading-[1.05] md:text-6xl">
+        Most organizations focus on reading books. Hardcover focuses on
+        reading life.
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-paper/70">
+        Read Life. Write the Future.
+        <span class="sr-only"> (proposed tagline, pending final approval)</span>
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <CtaBand href={heroCtaHref} label={heroCtaLabel} variant="primary" tone="ink" />
+        <CtaBand href="#approach" label="See the Approach" variant="outline" tone="ink" />
+      </div>
+    </div>
+
+    <nav aria-label="Literacy areas preview" class="md:pt-3">
+      <ol class="space-y-3 border-t border-paper/20 pt-6 md:border-t-0 md:pt-0">
+        {
+          indexPreview.map((item, i) => (
+            <li class="flex items-baseline gap-3 border-b border-paper/10 pb-3">
+              <span class="font-display text-sm text-gold">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="font-display text-lg text-paper/90">{item}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+  </div>
+</section>

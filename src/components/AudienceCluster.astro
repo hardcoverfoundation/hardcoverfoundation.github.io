@@ -1,0 +1,17 @@
+---
+interface Props {
+  heading: string;
+  description: string;
+  entryPoints: string[];
+}
+
+const { heading, description, entryPoints } = Astro.props;
+---
+
+<div class="border-t border-ink/10 py-8 first:border-t-0">
+  <h3 class="font-display text-xl font-semibold text-ink">{heading}</h3>
+  <p class="mt-2 max-w-2xl text-ink/75">{description}</p>
+  <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-copper-deep">
+    {entryPoints.map((point) => <li>{point}</li>)}
+  </ul>
+</div>

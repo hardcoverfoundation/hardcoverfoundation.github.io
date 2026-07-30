@@ -1,0 +1,45 @@
+---
+import Logo from "./Logo.astro";
+
+const year = new Date().getFullYear();
+
+// "subscribe," never "join" — CLAUDE.md: the corporation has no statutory
+// members and public copy must not imply membership status.
+const footerLinks = [
+  { href: "#approach", label: "Approach" },
+  { href: "#programs", label: "Programs" },
+  { href: "#get-involved", label: "Get Involved" },
+  { href: "#credibility", label: "Governance" },
+];
+---
+
+<footer class="border-t border-ink/10 bg-paper-dim">
+  <div class="mx-auto max-w-6xl px-5 py-12">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <Logo />
+
+      <nav aria-label="Footer" class="flex flex-col gap-3 md:flex-row md:gap-8">
+        {
+          footerLinks.map((link) => (
+            <a
+              class="min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep"
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <p class="mt-8 max-w-2xl text-sm text-ink/70">
+      Hardcover Foundation is a tax-exempt public charity recognized under
+      Section 501(c)(3) of the Internal Revenue Code. Contributions are
+      tax-deductible to the extent permitted by law.
+    </p>
+
+    <p class="mt-6 text-xs text-ink/60">
+      &copy; {year} Hardcover Foundation.
+    </p>
+  </div>
+</footer>

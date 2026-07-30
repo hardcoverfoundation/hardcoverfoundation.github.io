@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import {
+  literacyAreaLabels,
+  readStageLabels,
+  statusLabels,
+  legalPurposeLabels,
+} from "../lib/programLabels";
+
+interface Props {
+  program: CollectionEntry<"programs">;
+}
+
+const { program } = Astro.props;
+const { data } = program;
+---
+
+<BaseLayout
+  title={`${data.title} — Hardcover Foundation`}
+  description={data.summary}
+>
+  <article class="mx-auto max-w-3xl px-5 py-16">
+    <p class="font-display text-sm uppercase tracking-[0.2em] text-copper-deep">
+      {statusLabels[data.status]}
+    </p>
+    <h1 class="mt-3 font-display text-4xl font-semibold text-ink md:text-5xl">
+      {data.title}
+    </h1>
+    <p class="mt-6 text-lg text-ink/80">{data.summary}</p>
+
+    <dl class="mt-10 grid gap-8 border-t border-ink/10 pt-10 sm:grid-cols-2">
+      <div>
+        <dt class="font-display text-sm uppercase tracking-[0.15em] text-ink/60">
+          Purpose
+        </dt>
+        <dd class="mt-2 text-ink/80">{data.purpose}</dd>
+      </div>
+      <div>
+        <dt class="font-display text-sm uppercase tracking-[0.15em] text-ink/60">
+          Audience
+        </dt>
+        <dd class="mt-2 text-ink/80">{data.audience}</dd>
+      </div>
+      <div>
+        <dt class="font-display text-sm uppercase tracking-[0.15em] text-ink/60">
+          Literacy areas
+        </dt>
+        <dd class="mt-2 flex flex-wrap gap-2">
+          {
+            data.literacyAreas.map((area) => (
+              <span class="rounded-full border border-ink/15 px-3 py-1 text-sm text-ink/80">
+                {literacyAreaLabels[area]}
+              </span>
+            ))
+          }
+        </dd>
+      </div>
+      <div>
+        <dt class="font-display text-sm uppercase tracking-[0.15em] text-ink/60">
+          READ Framework stages
+        </dt>
+        <dd class="mt-2 flex flex-wrap gap-2">
+          {
+            data.readStages.map((stage) => (
+              <span class="rounded-full bg-ink px-3 py-1 text-sm text-paper">
+                {readStageLabels[stage]}
+              </span>
+            ))
+          }
+        </dd>
+      </div>
+    </dl>
+
+    <p class="mt-10 border-t border-ink/10 pt-6 text-sm text-ink/60">
+      Charitable and educational purpose: {legalPurposeLabels[data.legalPurposeAlignment]}.
+    </p>
+  </article>
+</BaseLayout>

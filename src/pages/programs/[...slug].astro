@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import ProgramLayout from "../../layouts/ProgramLayout.astro";
+
+// Approval is the publish gate: only entries with `approved: true` in
+// frontmatter generate a route, so the public build can never include a
+// program leadership hasn't signed off on. With zero approved entries this
+// returns an empty array and the build succeeds with no program routes,
+// which is the expected Phase-1 state (no fabricated entry created just to
+// exercise this route).
+export async function getStaticPaths() {
+  const approvedPrograms = await getCollection(
+    "programs",
+    ({ data }) => data.approved === true,
+  );
+
+  return approvedPrograms.map((program) => ({
+    params: { slug: program.id },
+    props: { program },
+  }));
+}
+
+const { program } = Astro.props;
+---
+
+<ProgramLayout program={program} />

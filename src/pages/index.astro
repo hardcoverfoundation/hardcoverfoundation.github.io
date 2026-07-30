@@ -1,0 +1,237 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import PullQuote from "../components/PullQuote.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import EditorialIndex from "../components/EditorialIndex.astro";
+import ReadFrameworkSequence from "../components/ReadFrameworkSequence.astro";
+import AudienceCluster from "../components/AudienceCluster.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { literacyAreaLabels } from "../lib/programLabels";
+import { donateUrl, newsletterSignupUrl } from "../site.config";
+
+const literacyProgression = [
+  {
+    label: "Reading Words",
+    description: "Traditional literacy: comprehension, vocabulary, fluency.",
+  },
+  {
+    label: "Reading Rooms and People",
+    description: "Context, body language, culture, and relationships.",
+  },
+  {
+    label: "Reading Opportunity and Systems",
+    description: "Contracts, finances, institutions, and playbooks.",
+  },
+  {
+    label: "Reading Yourself",
+    description: "Identity, purpose, growth, and leadership.",
+  },
+];
+
+// Full literacy taxonomy — lives only here, behind the disclosure. Areas of
+// Focus below uses a deliberately different, broader set so the same ten
+// labels aren't shown twice on the page.
+const literacyTags = Object.values(literacyAreaLabels).map((label) => ({
+  label,
+}));
+
+const readStages = [
+  {
+    letter: "R",
+    label: "Recognize",
+    description: "Recognize the power of knowledge and identity.",
+  },
+  {
+    letter: "E",
+    label: "Empower",
+    description: "Empower individuals through literacy in all forms.",
+  },
+  {
+    letter: "A",
+    label: "Articulate",
+    description:
+      "Help people articulate ideas, culture, creativity, needs, and vision.",
+  },
+  {
+    letter: "D",
+    label: "Develop",
+    description: "Develop minds, communities, initiatives, and future leaders.",
+  },
+];
+
+// Broader areas of focus, not the literacy taxonomy and not claimed as
+// active programs — see the disclaimer copy below.
+const areasOfFocus = [
+  { label: "Education and Youth Development" },
+  { label: "Mentorship and Leadership" },
+  { label: "Arts, Culture, and Storytelling" },
+  { label: "Workforce and Financial Readiness" },
+  { label: "Athletics, Movement, and Wellness" },
+  { label: "Entrepreneurship and Community Innovation" },
+];
+
+const canGive = Boolean(donateUrl || newsletterSignupUrl);
+---
+
+<BaseLayout
+  title="Hardcover Foundation"
+  description="Hardcover Foundation expands literacy beyond reading words — helping people read life: identity, culture, opportunity, and systems."
+>
+  <Hero />
+
+  <section class="bg-ink px-5 py-20 text-paper">
+    <div class="mx-auto max-w-3xl text-center">
+      <PullQuote
+        tone="ink"
+        quote="Our lives are books that will be read by many."
+      />
+      <p class="mt-8 font-display text-xl text-paper/80">
+        When people read your life, what do they get?
+      </p>
+      <p class="mt-4 text-sm text-paper/60">
+        An invitation to reflection, growth, purpose, and leadership — not a
+        judgment.
+      </p>
+    </div>
+  </section>
+
+  <section id="approach" class="bg-paper-dim px-5 py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="Expanded Literacy" title="Reading Life, Not Just Books" />
+      <p class="mt-6 max-w-2xl text-ink/80">
+        Traditional reading remains essential. Hardcover builds on it by
+        helping people interpret themselves, relationships, institutions,
+        culture, opportunities, and the systems around them.
+      </p>
+      <div class="mt-10">
+        <EditorialIndex items={literacyProgression} layout="progression" />
+      </div>
+      <details class="mt-8">
+        <summary class="cursor-pointer text-sm font-semibold text-copper-deep">
+          See all literacy focus areas
+        </summary>
+        <div class="mt-4">
+          <EditorialIndex items={literacyTags} layout="tags" />
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="bg-ink px-5 py-20 text-paper">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading
+        tone="ink"
+        eyebrow="Our Methodology"
+        title="The READ Framework"
+      />
+      <div class="mt-10">
+        <ReadFrameworkSequence stages={readStages} variant="condensed" />
+      </div>
+      <div class="mt-12 max-w-2xl">
+        <PullQuote
+          tone="ink"
+          quote="Literacy should produce transformation, not information alone."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-20">
+    <div class="mx-auto grid max-w-6xl gap-12 md:grid-cols-5">
+      <div class="md:col-span-3">
+        <SectionHeading eyebrow="Mission" title="Why Hardcover Exists" />
+        <p class="mt-6 text-lg text-ink/80">
+          Uniting and empowering communities through connection, access, and
+          shared knowledge, creating pathways to opportunity, growth, and
+          purpose.
+        </p>
+      </div>
+      <div class="border-t border-ink/10 pt-8 md:col-span-2 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+        <PullQuote
+          quote="Unlocking Human Potential to Change the World."
+          cite="Vision"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" class="bg-paper-dim px-5 py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="Looking Ahead" title="Areas of Focus" />
+      <p class="mt-6 max-w-2xl text-ink/80">
+        These are broad areas of focus where the Hardcover philosophy can be
+        applied — future and developing programming directions, not
+        verified active programs. Specific initiatives will be added here as
+        they're confirmed.
+      </p>
+      <div class="mt-10">
+        <EditorialIndex items={areasOfFocus} layout="tags" />
+      </div>
+    </div>
+  </section>
+
+  <section id="get-involved" class="bg-paper px-5 py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="Ways to Participate" title="Find Your Path" />
+      <div class="mt-10">
+        <AudienceCluster
+          heading="Learn & Grow"
+          description="For youth and students, parents and families, and educators and schools building literacy in every form — from academic foundations to identity and opportunity."
+          entryPoints={["Join a Program", "Join the Community"]}
+        />
+        <AudienceCluster
+          heading="Guide & Give Time"
+          description="For mentors and volunteers, artists and creators, and athletes and coaches who help others read the rooms, people, and systems around them."
+          entryPoints={["Become a Mentor", "Become a Volunteer"]}
+        />
+        <AudienceCluster
+          heading="Invest & Partner"
+          description="For entrepreneurs and professionals, businesses, nonprofits, municipalities, and donors investing in community-centered literacy work."
+          entryPoints={["Become a Partner", "Lead an Initiative", "Support the Mission"]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading eyebrow="Partnership" title="Partnering with Hardcover" />
+      <p class="mt-6 text-ink/80">
+        Hardcover Foundation welcomes partnerships with schools, nonprofits,
+        and civic organizations whose mission supports literacy, mentorship,
+        and community empowerment. Partnership conversations are framed
+        around shared educational and community impact.
+      </p>
+    </div>
+  </section>
+
+  {
+    canGive && (
+      <section id="give" class="bg-copper-deep px-5 py-20 text-paper">
+        <div class="mx-auto max-w-3xl text-center">
+          <SectionHeading tone="ink" eyebrow="Support the Mission" title="Give or Stay Connected" />
+          <div class="mt-10 flex flex-wrap justify-center gap-4">
+            <CtaBand href={donateUrl} label="Donate" variant="primary" tone="ink" />
+            <CtaBand
+              href={newsletterSignupUrl}
+              label="Subscribe for Updates"
+              variant="outline"
+              tone="ink"
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section id="credibility" class="bg-paper px-5 py-16">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading eyebrow="Governance" title="Institutional Credibility" />
+      <p class="mt-6 text-ink/80">
+        Hardcover Foundation is a tax-exempt public charity recognized under
+        Section 501(c)(3) of the Internal Revenue Code.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

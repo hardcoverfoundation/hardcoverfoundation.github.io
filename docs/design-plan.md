@@ -34,22 +34,32 @@ same weight/scale throughout (would read as a copy rather than an homage).
 
 **Hardcover's existing brand assets** (already owned by the org, not a
 design reference — found in git history and `public/`):
-- `favicon.svg` (still in `public/`): an abstract curved monochrome mark,
-  black in light mode / white in dark mode via `prefers-color-scheme`.
-- A former wordmark PNG (`assets/hardcover-logo.png`, removed from `public/`
-  in the Astro rebuild but recoverable from git history at `dd40634`): bold
+- `favicon.svg` and `assets/hardcover-logo.png` (both still present, the
+  latter recoverable from git history at `dd40634` before that): bold
   slab-serif "HARDCOVER" lettering with a folded-corner ribbon/flag shape,
   monochrome black.
 
-**Finding:** these two brand assets do not obviously belong to the same
-logo system — one is an abstract organic glyph, the other a bold slab
-wordmark with a flag device. Per the master prompt's instruction to "inspect
-the approved logo before finalizing exact colors," this should be confirmed
-with leadership before the final identity is locked: which mark (or both) is
-current, and is there an approved full lockup combining wordmark + emblem.
-Until confirmed, this plan treats the `favicon.svg` glyph as the working
-emblem (it's the one currently live in the deployed site) and does not
-assume the flag wordmark is still current.
+**Correction (implementation-phase review):** this section originally
+described `favicon.svg` as a separate abstract curved monochrome glyph,
+distinct from the `hardcover-logo.png` wordmark, and treated the two as an
+unreconciled two-asset logo system. That was wrong. Extracting and
+byte-comparing the two files shows `favicon.svg` embeds the *exact same*
+466×88 raster image as `hardcover-logo.png` — it's the identical wordmark
+artwork wrapped in an SVG container, with a `prefers-color-scheme` filter
+block that does nothing (`filter: none` in both branches, effectively dead
+code, likely a leftover from whatever favicon generator produced it).
+`apple-touch-icon.png` and `favicon-96x96.png` are the same artwork again,
+just cropped/padded into square icon sizes.
+
+**Finding:** there is currently only **one** logo asset in this repository —
+the "HARDCOVER" wordmark-on-a-flag — in several derived sizes. There is no
+separate emblem-only mark to reconcile it against. Per the master prompt's
+instruction to "inspect the approved logo before finalizing exact colors,"
+it should still be confirmed with leadership whether this wordmark is the
+current, final logo, and whether a distinct emblem/icon mark exists
+elsewhere (e.g., unshipped brand files) that should eventually accompany
+it. Until confirmed, this plan treats the wordmark as the sole working mark
+and does not assume a second emblem exists.
 
 ## 2. How Hardcover's design stays original
 
@@ -170,29 +180,44 @@ index and READ Framework sequence become vertical, minimum 20px side
 padding, 44px touch targets — directly answering the "weak mobile layout"
 item in `docs/design-feedback-prompts.md`.
 
-## 5. Component architecture
+## 5. Component architecture (proposed — none of this exists yet)
 
-Building on what's already in `src/components/` and `src/layouts/`:
+**Correction (implementation-phase review):** the original draft of this
+section described these components as extensions of files already present in
+`src/components/` and `src/layouts/` on this branch. That was inaccurate.
+`redesign/website-v3` currently has no `src/components/`, `src/layouts/`, or
+Astro application of any kind — it is a static-HTML branch (`index.html`,
+`assets/`, `CNAME`) plus this `docs/` folder. Every component below is new
+work for Phase 1. The naming and responsibilities are informed by structural
+*patterns* observed on the archived `website-v2` branch (shapes only, per
+§13 — no copy or markup carried over):
 
 ```text
 src/components/
-  Header.astro                 (exists — extend with mobile nav disclosure)
-  Footer.astro                 (exists — extend with governance/legal links)
-  Hero.astro                   (new — typographic hero, slot-based so copy can change without touching layout)
+  Header.astro                 (new — accessible header/nav; renders Logo.astro rather than an inline mark)
+  Footer.astro                 (new — governance/legal links; also uses Logo.astro if the footer repeats the mark)
+  Logo.astro                   (new — isolates the provisional live-site logo asset behind one component so it can
+                                 be replaced later without touching Header/Footer layout, per the §1 finding that
+                                 leadership hasn't yet confirmed this wordmark as final — logo choice is not treated
+                                 as final)
+  Hero.astro                   (new — Concept A, "The Index," slot-based so copy can change without touching layout)
   SectionHeading.astro         (new — chapter-numeral + heading pattern, reusable across pages)
   EditorialIndex.astro         (new — the literacy-progression / literacy-category list pattern, reusable for §4 and §6)
   ReadFrameworkSequence.astro  (new — used at both condensed (home) and full (dedicated page) size via a `variant` prop)
   AudienceCluster.astro        (new — one of the three grouped audience rows)
-  StatBand.astro               (new — renders either verified stats or the honest empty-state; never both a real and placeholder number)
-  FeatureStory.astro           (new — same content-gating pattern as StatBand)
+  StatBand.astro               (new — on the homepage, renders no markup at all when no verified metric exists; a
+                                 softer "content pending" empty-state is reserved for future dedicated pages only)
+  FeatureStory.astro           (new — same no-markup-when-absent pattern as StatBand on the homepage)
   PullQuote.astro              (new — for the philosophy strip and vision column)
-  CtaBand.astro                (new — donate/subscribe band, reused on non-home pages too)
+  CtaBand.astro                (new — donate/subscribe band; URLs come from an inactive/configurable value until
+                                 real links are supplied, reused on non-home pages too)
 ```
 
 `Hero.astro`, `StatBand.astro`, and `FeatureStory.astro` should each accept an
-explicit "no content yet" path rather than requiring the caller to remember
-not to fabricate — this makes the empty-state policy structural rather than
-a matter of remembering not to type in a fake number later.
+explicit "no content" path that renders nothing on the homepage, rather than
+requiring the caller to remember not to fabricate or type a placeholder
+string — this makes the no-fabrication rule structural, not a matter of
+discipline at write-time.
 
 ## 6. Typed content model
 
@@ -298,23 +323,32 @@ need sign-off before being treated as final.
 
 ## 9. Technical direction assessment
 
-The Astro/TypeScript/Tailwind/content-collections/GitHub-Pages stack the
-master prompt asks to assess is **already implemented** on this branch
-(`astro.config.mjs`, `tailwindcss` v4 via `@tailwindcss/vite`, `content.config.ts`,
-`public/CNAME` preserved). Assessment: appropriate — static output fits
-GitHub Pages, content collections give typed frontmatter (directly enables
-the `status`/`approved` guards in §6), and Tailwind v4's CSS-based config
-keeps the token system in plain CSS (`tokens.css`) rather than a JS config
-file, which is easy to hand back to a non-engineer for palette tweaks later.
+**Correction (implementation-phase review):** the original draft of this
+section stated the Astro/TypeScript/Tailwind/content-collections stack was
+**already implemented** on this branch. That was incorrect — it described
+the state of the archived `website-v2` branch, not `redesign/website-v3`.
+`redesign/website-v3` has no `package.json`, no `astro.config.mjs`, no
+`tailwindcss` install, and no `content.config.ts`. `public/CNAME` does not
+exist yet either — only the legacy root `CNAME` is present, and it stays
+untouched per CLAUDE.md.
 
-No new dependency is required to keep the stack running as-is. The one
-dependency change flagged for approval is the font self-hosting packages in
-§3 — everything else in this plan (new components, revised schema) is
-buildable with what's already installed.
+Assessment (unchanged): the Astro/TypeScript/Tailwind/content-collections/
+GitHub-Pages stack the master prompt asks about is the right choice — static
+output fits GitHub Pages, content collections give typed frontmatter
+(directly enables the `status`/approval guards in §6), and Tailwind v4's
+CSS-based config keeps the token system in plain CSS (`tokens.css`) rather
+than a JS config file, which is easy to hand back to a non-engineer for
+palette tweaks later. All of it is **proposed, not present** — every file
+above is new work for Phase 1, written independently rather than copied from
+`website-v2` (per §13).
 
-`public/CNAME` is already present and correctly preserved from the legacy
-site; no DNS or Pages-configuration change is implied by anything in this
-plan.
+Dependencies needed to stand this up: `astro`, `typescript`, `@astrojs/check`,
+`tailwindcss`, `@tailwindcss/vite`, plus the font self-hosting packages
+already flagged in §3. All within the approved Phase-1 dependency list.
+
+`public/CNAME` will be created fresh in Phase 1, mirroring the production
+domain in the existing root `CNAME` rather than replacing it. No DNS or
+Pages-configuration change is implied by anything in this plan.
 
 ## 10. Accessibility plan (WCAG 2.2 AA target)
 
@@ -412,6 +446,10 @@ content in place.
    together with the fabricated content identified in content-strategy §1, so
    there is no safe way to bring it over in one step — anything taken from it
    has to be pulled out file-by-file and reviewed individually, per point 4.
+   **Commit `fb6e6f5` ("Add Hardcover website strategy and design planning"),
+   the branch's second and current tip commit, builds directly on top of
+   `66cd2e6` and must not be merged or cherry-picked either** — it inherits
+   the same fabricated-content tree.
 4. **Individual files worth reviewing later for selective reuse** (structure
    only, copy/data re-authored fresh in every case):
    - `astro.config.mjs` — Tailwind Vite plugin wiring, no content
