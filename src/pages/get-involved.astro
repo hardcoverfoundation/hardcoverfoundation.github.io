@@ -1,0 +1,252 @@
+---
+// Get Involved overview (docs/phase-2-checklist.md Commit 5).
+// Every pathway is described as a way to express interest, not an active
+// application, registration, or intake process — no programs, sponsorship
+// levels, or donation platform are approved yet. All CTAs route to
+// info@hardcoverfoundation.org (approved-contact-information.md); no forms.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+
+const email = "info@hardcoverfoundation.org";
+const mailto = (subject: string) =>
+  `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+
+interface Pathway {
+  name: string;
+  description: string;
+  cta: { label: string; href: string; ariaLabel: string };
+}
+
+interface Cluster {
+  heading: string;
+  description: string;
+  pathways: Pathway[];
+}
+
+const clusters: Cluster[] = [
+  {
+    heading: "Learn & Grow",
+    description:
+      "For youth and students, parents and families, and educators and schools interested in Hardcover's literacy-focused programming as it develops.",
+    pathways: [
+      {
+        name: "Join a Program",
+        description:
+          "Hardcover's programs are currently in strategic development. Express interest now and hear from us as programming is confirmed.",
+        cta: {
+          label: "Express interest",
+          href: mailto("Interest in Joining a Program"),
+          ariaLabel: "Express interest in joining a program",
+        },
+      },
+    ],
+  },
+  {
+    heading: "Guide & Give Time",
+    description:
+      "For mentors and volunteers who want to help others read the rooms, people, and systems around them.",
+    pathways: [
+      {
+        name: "Become a Mentor",
+        description:
+          "Share your experience and guide others as Hardcover builds its mentorship pathways.",
+        cta: {
+          label: "Express interest",
+          href: mailto("Interest in Becoming a Mentor"),
+          ariaLabel: "Express interest in becoming a mentor",
+        },
+      },
+      {
+        name: "Volunteer",
+        description:
+          "Give your time in support of the mission as community initiatives take shape.",
+        cta: {
+          label: "Express interest",
+          href: mailto("Interest in Volunteering"),
+          ariaLabel: "Express interest in volunteering",
+        },
+      },
+    ],
+  },
+  {
+    heading: "Invest & Partner",
+    description:
+      "For entrepreneurs and professionals, businesses, nonprofits, municipalities, and donors investing in community-centered work.",
+    pathways: [
+      {
+        name: "Lead an Initiative",
+        description:
+          "Bring your own gifts, expertise, or idea to a mission-aligned initiative.",
+        cta: {
+          label: "Learn more about leading an initiative",
+          href: "#lead-an-initiative",
+          ariaLabel: "Learn more about leading an initiative",
+        },
+      },
+      {
+        name: "Become a Community Partner",
+        description:
+          "Align your organization with Hardcover's educational and community-centered work.",
+        cta: {
+          label: "Learn more about partnership",
+          href: "#partnership",
+          ariaLabel: "Learn more about becoming a community partner",
+        },
+      },
+      {
+        name: "Sponsor the Mission",
+        description:
+          "Support Hardcover's mission as its programs and initiatives develop.",
+        cta: {
+          label: "Learn more about sponsorship",
+          href: "#partnership",
+          ariaLabel: "Learn more about sponsoring the mission",
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Get Involved — Hardcover Foundation"
+  description="Ways to express interest in Hardcover Foundation's programs, mentorship, volunteering, initiatives, and partnerships as they develop."
+>
+  <PageHero
+    eyebrow="Get Involved"
+    title="Get Involved"
+    dek="Hardcover Foundation is a platform for people who want to use their gifts, talents, expertise, passions, businesses, or vision to positively impact the community."
+  />
+
+  <section class="bg-copper-deep px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <SectionHeading
+        tone="ink"
+        eyebrow="Where Things Stand"
+        title="Programs, Partnerships, and Initiatives Are in Development"
+      />
+      <p class="mx-auto mt-6 max-w-xl text-paper/80">
+        Hardcover Foundation is currently developing its programs,
+        partnerships, and community initiatives. The pathways below are ways
+        to express interest and start a conversation — not applications,
+        registrations, or active intake processes.
+      </p>
+      <a
+        href={mailto("General Interest in Getting Involved")}
+        class="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-md bg-paper px-6 text-sm font-semibold text-ink hover:bg-gold"
+      >
+        Express General Interest
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="Ways to Participate" title="Find Your Path" />
+      <div class="mt-12 flex flex-col gap-12">
+        {
+          clusters.map((cluster) => (
+            <div class="border-t border-ink/10 pt-8 first:border-t-0 first:pt-0">
+              <h3 class="font-display text-xl font-semibold text-ink">
+                {cluster.heading}
+              </h3>
+              <p class="mt-2 max-w-2xl text-ink/75">{cluster.description}</p>
+              <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {cluster.pathways.map((pathway) => (
+                  <div class="border-l-2 border-copper-deep/40 pl-4">
+                    <h4 class="font-display text-lg text-ink">
+                      {pathway.name}
+                    </h4>
+                    <p class="mt-1 text-sm text-ink/70">
+                      {pathway.description}
+                    </p>
+                    <a
+                      href={pathway.cta.href}
+                      aria-label={pathway.cta.ariaLabel}
+                      class="mt-3 inline-flex min-h-[44px] items-center text-sm font-medium text-copper-deep underline decoration-copper-deep/30 underline-offset-4 hover:text-ink"
+                    >
+                      {pathway.cta.label}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="lead-an-initiative" class="scroll-mt-24 bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading eyebrow="Invest & Partner" title="Lead an Initiative" />
+      <p class="mt-6 text-ink/80">
+        Hardcover Foundation helps qualified people explore how their gifts,
+        expertise, ideas, and passions may contribute to educational and
+        community-centered initiatives. If you have a mission-aligned idea,
+        you're welcome to reach out, explore alignment, and discuss it.
+      </p>
+      <p class="mt-4 text-ink/80">
+        Leading an initiative means collaborating on a project the
+        Foundation has approved — it does not mean operating independently
+        under Hardcover's nonprofit status. Hardcover Foundation is not a
+        fiscal sponsor, participants are not Foundation employees, and
+        expressing interest does not guarantee funding, a contract, a
+        customer, publicity, or that a proposed idea will launch.
+      </p>
+      <a
+        href={mailto("Interest in Leading an Initiative")}
+        class="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-md bg-copper-deep px-6 text-sm font-semibold text-paper hover:bg-ink"
+      >
+        Express interest in leading an initiative
+      </a>
+    </div>
+  </section>
+
+  <section id="partnership" class="scroll-mt-24 bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading eyebrow="Invest & Partner" title="Partnership and Sponsorship" />
+      <p class="mt-6 text-ink/80">
+        Hardcover Foundation welcomes partnerships and sponsorship around
+        education, youth and community development, mentorship, culture and
+        creativity, leadership, and access to knowledge and resources.
+        Partnership conversations are framed around shared educational and
+        community impact.
+      </p>
+      <p class="mt-4 text-ink/80">
+        Becoming a Community Partner and sponsoring the mission are both
+        currently ways to express interest — they route to the same general
+        inquiry email until dedicated partnership and sponsorship intake
+        processes are established.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a
+          href={mailto("Interest in Community Partnership")}
+          class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-copper-deep px-6 text-sm font-semibold text-paper hover:bg-ink"
+        >
+          Express interest in community partnership
+        </a>
+        <a
+          href={mailto("Interest in Sponsoring the Mission")}
+          class="inline-flex min-h-[44px] items-center justify-center rounded-md border border-copper-deep px-6 text-sm font-semibold text-copper-deep hover:bg-copper-deep hover:text-paper"
+        >
+          Express interest in sponsoring the mission
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-ink/80">
+        Have a general question first? Visit the{" "}
+        <a
+          href="/contact"
+          class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+          >Contact page</a
+        >.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

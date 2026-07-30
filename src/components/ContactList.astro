@@ -4,7 +4,9 @@
 // endpoint to receive a form POST (docs/phase-2-checklist.md §6). Email and
 // purposes are required props; this component holds no contact data
 // itself. No <form> element, no form-service script, no client-side API
-// key.
+// key. Each purpose gets a distinct mailto subject line (not fabricated
+// message content, just the purpose label) so recipients see intent at a
+// glance; every subject still resolves to the same single address.
 interface Props {
   email: string;
   purposes?: string[];
@@ -12,6 +14,8 @@ interface Props {
 
 const { email, purposes = [] } = Astro.props;
 const mailto = `mailto:${email}`;
+const mailtoWithSubject = (purpose: string) =>
+  `${mailto}?subject=${encodeURIComponent(purpose)}`;
 ---
 
 <div>
@@ -29,7 +33,7 @@ const mailto = `mailto:${email}`;
         {purposes.map((purpose) => (
           <li>
             <a
-              href={mailto}
+              href={mailtoWithSubject(purpose)}
               class="flex min-h-[44px] items-center text-ink/80 hover:text-copper-deep"
             >
               {purpose}
