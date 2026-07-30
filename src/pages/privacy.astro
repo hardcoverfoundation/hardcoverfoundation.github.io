@@ -1,0 +1,105 @@
+---
+// Privacy Notice (docs/phase-2-checklist.md Commit 6, §3/§4/§11).
+//
+// PROPOSED DRAFT — requires Hardcover Foundation leadership review before
+// production launch. Not reviewed or approved by an attorney; nothing on
+// this page should be presented to visitors as legal advice. This note is
+// for the codebase only — the rendered page carries no "unapproved" banner.
+//
+// Describes only functionality that actually exists in this build: no
+// contact form, no donation processing, no user accounts, no program
+// registration, no newsletter integration, and no analytics or advertising
+// integration of any kind. Do not add claims here without first adding the
+// underlying feature.
+import ProsePage from "../layouts/ProsePage.astro";
+
+const email = "info@hardcoverfoundation.org";
+---
+
+<ProsePage
+  title="Privacy Notice — Hardcover Foundation"
+  description="How Hardcover Foundation's website handles information, in plain terms."
+  eyebrow="Legal"
+  heroTitle="Privacy Notice"
+  dek="Last updated: July 30, 2026"
+>
+  <p>
+    This notice describes how the Hardcover Foundation website
+    (hardcoverfoundation.org) currently handles information. It covers this
+    website only, as it exists today.
+  </p>
+
+  <h2>What this website does not do</h2>
+  <p>As of this notice, the website does not:</p>
+  <ul>
+    <li>operate a contact form</li>
+    <li>process donations or payments</li>
+    <li>create or require user accounts</li>
+    <li>offer online registration for programs</li>
+    <li>use a newsletter or email-marketing service</li>
+    <li>
+      use analytics, tracking pixels, advertising cookies, or any other
+      tool that profiles visitors or serves targeted advertising
+    </li>
+  </ul>
+  <p>
+    If any of these features are added in the future, this notice will be
+    updated first to describe them.
+  </p>
+
+  <h2>Browsing the website</h2>
+  <p>
+    The website consists of ordinary linked pages. Moving between pages on
+    hardcoverfoundation.org does not submit any personal information to
+    Hardcover Foundation.
+  </p>
+
+  <h2>Emailing Hardcover Foundation</h2>
+  <p>
+    Several pages provide a <code>mailto:</code> link to {email}. Selecting
+    one of these links opens the email application already configured on
+    your own device — the website itself does not collect, transmit, or
+    store anything you type.
+  </p>
+  <p>
+    If you choose to send an email to {email}, any information you include —
+    your name, email address, and the contents of your message — is
+    provided voluntarily by you. That message is handled through your own
+    email service and Hardcover Foundation's email service, the same way as
+    any other email correspondence, and is not published on the website.
+  </p>
+
+  <h2>Security</h2>
+  <p>
+    Hardcover Foundation takes reasonable care with the systems it controls,
+    but no method of electronic communication or storage is completely
+    secure, and this notice does not promise absolute security or guarantee
+    against every possible risk.
+  </p>
+
+  <h2>Retention</h2>
+  <p>
+    Hardcover Foundation does not commit to a specific retention period for
+    email correspondence in this notice. Correspondence is kept only as
+    long as reasonably useful for responding to and recordkeeping of the
+    inquiry.
+  </p>
+
+  <h2>Changes to this notice</h2>
+  <p>
+    This notice may be updated as the website's features or services
+    change — for example, if a contact form, donation processing, or an
+    analytics tool is added later. The date at the top of this page
+    reflects the most recent update.
+  </p>
+
+  <h2>Questions</h2>
+  <p>
+    Questions about this notice can be sent to{" "}
+    <a
+      href={`mailto:${email}`}
+      class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+      >{email}</a
+    >.
+  </p>
+</ProsePage>

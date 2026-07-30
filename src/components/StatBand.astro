@@ -1,0 +1,39 @@
+---
+// Homepage content-gating rule: no verified metric exists yet, so this
+// renders no markup at all when `stats` is absent — not a placeholder
+// number, not a "coming soon" message. Called with no props on the
+// homepage today; wiring up a future verified figure means only passing
+// `stats`, no template change.
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  stats?: Stat[];
+}
+
+const { stats } = Astro.props;
+---
+
+{
+  stats && stats.length > 0 && (
+    <section aria-labelledby="impact-heading" class="bg-ink px-5 py-20 text-paper">
+      <div class="mx-auto max-w-6xl">
+        <h2 id="impact-heading" class="font-display text-3xl font-semibold">
+          Verified Community Impact
+        </h2>
+        <dl class="mt-10 grid gap-8 sm:grid-cols-3">
+          {stats.map((stat) => (
+            <div>
+              <dt class="font-display text-4xl font-semibold text-gold">
+                {stat.value}
+              </dt>
+              <dd class="mt-2 text-paper/80">{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )
+}

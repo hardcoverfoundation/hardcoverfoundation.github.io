@@ -1,0 +1,69 @@
+---
+// Governance and Transparency (docs/phase-2-checklist.md Commit 3, §7).
+// Source: legal-facts-for-website.md (verbatim governance paragraph, entity
+// facts, formal purposes) and approved-board-information.md (board list).
+// Does not publish the EIN, determination letter, Form 1023 materials,
+// Pay.gov/IRS tracking identifiers, payment details, or mailing/registered
+// addresses, and does not promise all filings will be hosted on the site or
+// link to an unverified external destination.
+import ProsePage from "../../layouts/ProsePage.astro";
+import LeadershipList from "../../components/LeadershipList.astro";
+
+const boardOfDirectors = [
+  { name: "Horace Allen", title: "President" },
+  { name: "Damon Thompson Sr.", title: "Vice President" },
+  { name: "Brittany Johnson", title: "Secretary" },
+  { name: "Xavier Lee", title: "Treasurer" },
+];
+---
+
+<ProsePage
+  title="Governance and Transparency — Hardcover Foundation"
+  description="Hardcover Foundation is recognized by the Internal Revenue Service as exempt from federal income tax under Section 501(c)(3)."
+  eyebrow="About"
+  heroTitle="Governance and Transparency"
+>
+  <p>
+    Hardcover Foundation is recognized by the Internal Revenue Service as
+    exempt from federal income tax under Section 501(c)(3) and is classified
+    as a public charity under Section 170(b)(1)(A)(vi). Its federal tax
+    exemption is effective July 6, 2025.
+  </p>
+
+  <h2>Corporate Facts</h2>
+  <ul>
+    <li>Hardcover Foundation is a Virginia nonstock corporation.</li>
+    <li>The corporation has no statutory members.</li>
+    <li>
+      Its Virginia Certificate of Restatement is effective September 17,
+      2025.
+    </li>
+  </ul>
+
+  <h2>Charitable and Educational Purposes</h2>
+  <p>Hardcover Foundation's governing documents identify purposes that include:</p>
+  <ul>
+    <li>
+      preserving and elevating cultural and literary heritage through
+      literacy, storytelling, mentorship, and creative programming
+    </li>
+    <li>
+      empowering youth and communities through educational workshops,
+      cultural partnerships, and creative initiatives
+    </li>
+    <li>
+      collaborating with nonprofit organizations for educational and
+      community enrichment
+    </li>
+  </ul>
+
+  <h2>Board of Directors</h2>
+  <LeadershipList members={boardOfDirectors} />
+
+  <h2>Filings and Transparency</h2>
+  <p>
+    Governance documents and public filings will be referenced or made
+    available as approved for publication. Hardcover Foundation's tax-exempt
+    status can be verified through public IRS resources.
+  </p>
+</ProsePage>

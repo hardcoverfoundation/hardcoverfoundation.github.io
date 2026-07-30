@@ -1,0 +1,101 @@
+---
+// About landing page (docs/phase-2-checklist.md Commit 3). Introduces and
+// links to the five approved About subsections without duplicating any of
+// them in full. No founding narrative, founder biography, launch date, or
+// prior-program claim is included — none is approved (CLAUDE.md, "Private
+// source directory" restrictions).
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PullQuote from "../../components/PullQuote.astro";
+
+const sections = [
+  {
+    href: "/about/mission-vision",
+    label: "Mission and Vision",
+    description:
+      "The mission and vision that guide every initiative Hardcover Foundation pursues.",
+  },
+  {
+    href: "/about/difference",
+    label: "What Makes Hardcover Different",
+    description:
+      "Why Hardcover focuses on reading life, not only reading books.",
+  },
+  {
+    href: "/about/philosophy",
+    label: "The Hardcover Philosophy",
+    description:
+      "An invitation to reflect on what people read when they read your life.",
+  },
+  {
+    href: "/about/leadership",
+    label: "Leadership and Board",
+    description: "The Board of Directors that governs Hardcover Foundation.",
+  },
+  {
+    href: "/about/governance",
+    label: "Governance and Transparency",
+    description:
+      "Hardcover Foundation's legal status, structure, and commitment to transparency.",
+  },
+];
+---
+
+<BaseLayout
+  title="About — Hardcover Foundation"
+  description="Hardcover Foundation is a platform for people who want to use their gifts, talents, expertise, passions, businesses, or vision to positively impact the community."
+>
+  <PageHero
+    eyebrow="About"
+    title="About Hardcover Foundation"
+    dek="Hardcover Foundation is a platform for people who want to use their gifts, talents, expertise, passions, businesses, or vision to positively impact the community."
+  />
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <PullQuote
+        tone="ink"
+        quote="Most organizations focus on reading books. Hardcover focuses on reading life."
+      />
+      <p class="mt-6 text-paper/70">
+        <a
+          href="/about/difference"
+          class="underline decoration-paper/40 underline-offset-4 hover:text-gold"
+          >Read what makes Hardcover different</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="font-display text-2xl font-semibold text-ink md:text-3xl">
+        Explore About
+      </h2>
+      <ol class="mt-8 flex flex-col divide-y divide-ink/10 border-y border-ink/10">
+        {
+          sections.map((section, i) => (
+            <li class="py-6">
+              <a
+                href={section.href}
+                class="group flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6"
+              >
+                <span class="font-display text-sm text-copper-deep">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span class="flex-1">
+                  <span class="font-display text-xl font-semibold text-ink group-hover:text-copper-deep">
+                    {section.label}
+                  </span>
+                  <span class="mt-1 block max-w-2xl text-ink/70">
+                    {section.description}
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+// Terms of Use (docs/phase-2-checklist.md Commit 6, §3/§4/§11).
+//
+// PROPOSED DRAFT — requires Hardcover Foundation leadership review before
+// production launch. Not reviewed or approved by an attorney; nothing on
+// this page should be presented to visitors as legal advice. This note is
+// for the codebase only — the rendered page carries no "unapproved" banner.
+//
+// Restrained scope: covers only the current informational, static site.
+// No liability waiver, arbitration, venue/governing-law clause,
+// indemnification clause, age restriction, donation terms, refund rules,
+// program-participation contract, or copyright-registration claim. Does not
+// claim submitted ideas automatically become Foundation property.
+import ProsePage from "../layouts/ProsePage.astro";
+
+const email = "info@hardcoverfoundation.org";
+---
+
+<ProsePage
+  title="Terms of Use — Hardcover Foundation"
+  description="The terms that apply to using the Hardcover Foundation website."
+  eyebrow="Legal"
+  heroTitle="Terms of Use"
+  dek="Last updated: July 30, 2026"
+>
+  <p>
+    These terms apply to your use of the Hardcover Foundation website
+    (hardcoverfoundation.org). By using this website, you agree to these
+    terms.
+  </p>
+
+  <h2>About this website</h2>
+  <p>
+    This website provides general information about Hardcover Foundation,
+    its mission, and its work. Content on this website is provided for
+    general informational purposes and may be updated or corrected at any
+    time without notice.
+  </p>
+
+  <h2>No membership, employment, or contractual relationship</h2>
+  <p>
+    Using this website, browsing its content, or emailing Hardcover
+    Foundation does not create an employment, partnership, membership,
+    agency, funding, fiscal-sponsorship, contractual, or beneficiary
+    relationship of any kind between you and Hardcover Foundation.
+    Hardcover Foundation is a Virginia nonstock corporation with no
+    statutory members, and nothing on this website should be read to
+    suggest otherwise.
+  </p>
+
+  <h2>Submitting an idea or emailing Hardcover Foundation</h2>
+  <p>
+    If you email Hardcover Foundation, including to share an idea, ask a
+    question, or express interest in getting involved, doing so does not
+    guarantee program approval, funding, partnership, sponsorship,
+    employment, publicity, or that any idea will be developed or launched.
+    Hardcover Foundation reviews inquiries at its own discretion.
+  </p>
+
+  <h2>Names, logos, and content</h2>
+  <p>
+    The Hardcover Foundation name, logo, and the original content on this
+    website may not be used in a way that is false, misleading, or implies
+    an endorsement, affiliation, or sponsorship that does not exist.
+  </p>
+
+  <h2>Links and external services</h2>
+  <p>
+    This website may in the future link to or make use of external
+    services or websites operated by others. Those services and websites,
+    when added, are governed by their own terms and privacy notices, not
+    this page.
+  </p>
+
+  <h2>Changes to these terms</h2>
+  <p>
+    These terms may be updated as the website's content or functionality
+    changes. The date at the top of this page reflects the most recent
+    update.
+  </p>
+
+  <h2>Questions</h2>
+  <p>
+    General questions about these terms can be sent to{" "}
+    <a
+      href={`mailto:${email}`}
+      class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+      >{email}</a
+    >.
+  </p>
+</ProsePage>

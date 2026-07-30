@@ -1,0 +1,31 @@
+---
+// Renders a real link only when `href` is supplied — never a disabled
+// button, a "#" link, or a fabricated URL. If `href` is absent, this
+// renders no markup at all. See src/site.config.ts.
+interface Props {
+  href?: string | null;
+  label: string;
+  variant?: "primary" | "outline";
+  tone?: "ink" | "paper";
+}
+
+const { href, label, variant = "primary", tone = "paper" } = Astro.props;
+
+const base =
+  "inline-flex min-h-[44px] items-center justify-center rounded-md px-6 text-sm font-semibold transition-colors";
+
+const styles =
+  variant === "primary"
+    ? `${base} bg-copper-deep text-paper hover:bg-ink`
+    : tone === "ink"
+      ? `${base} border border-paper/40 text-paper hover:bg-paper/10`
+      : `${base} border border-ink/30 text-ink hover:bg-ink/5`;
+---
+
+{
+  href && (
+    <a class={styles} href={href}>
+      {label}
+    </a>
+  )
+}

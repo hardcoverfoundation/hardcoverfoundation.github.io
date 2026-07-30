@@ -1,0 +1,92 @@
+---
+import Logo from "./Logo.astro";
+import { primaryNav, isActiveRoute } from "../lib/navigation";
+
+const year = new Date().getFullYear();
+
+// Reuses the same route data as Header.astro (src/lib/navigation.ts) so the
+// footer can't drift onto a different set of hrefs for the same sections.
+// Only the routes that exist as of Commit 2 are pulled in here; Contact is
+// left to the header/contact page rather than duplicated in the footer.
+const footerRouteLabels = ["Approach", "Programs", "Get Involved"];
+const footerRouteLinks = primaryNav.filter((link) =>
+  footerRouteLabels.includes(link.label),
+);
+
+// "/about/governance" now exists (Phase 2 Commit 3), so Governance points
+// at the real route instead of the homepage's inline anchor.
+const governanceLink = { href: "/about/governance", label: "Governance" };
+
+// Legal/utility links (Phase 2 Commit 6, §5/§6) — a second footer row,
+// separate from the primary section nav above.
+const legalLinks = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/accessibility", label: "Accessibility" },
+  { href: "/terms", label: "Terms" },
+];
+
+const currentPath = Astro.url.pathname;
+const governanceActive = isActiveRoute(currentPath, governanceLink.href);
+---
+
+<footer class="border-t border-ink/10 bg-paper-dim">
+  <div class="mx-auto max-w-6xl px-5 py-12">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <Logo />
+
+      <nav aria-label="Footer" class="flex flex-col gap-3 md:flex-row md:gap-8">
+        {
+          footerRouteLinks.map((link) => {
+            const active = isActiveRoute(currentPath, link.href);
+            return (
+              <a
+                class={`min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep ${active ? "font-semibold text-copper-deep" : ""}`}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            );
+          })
+        }
+        <a
+          class={`min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep ${governanceActive ? "font-semibold text-copper-deep" : ""}`}
+          href={governanceLink.href}
+          aria-current={governanceActive ? "page" : undefined}
+        >
+          {governanceLink.label}
+        </a>
+      </nav>
+    </div>
+
+    <nav
+      aria-label="Legal"
+      class="mt-6 flex flex-col gap-3 border-t border-ink/10 pt-6 md:flex-row md:gap-8"
+    >
+      {
+        legalLinks.map((link) => {
+          const active = isActiveRoute(currentPath, link.href);
+          return (
+            <a
+              class={`min-h-[44px] flex items-center text-sm font-medium text-ink/80 hover:text-copper-deep ${active ? "font-semibold text-copper-deep" : ""}`}
+              href={link.href}
+              aria-current={active ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <p class="mt-8 max-w-2xl text-sm text-ink/70">
+      Hardcover Foundation is a tax-exempt public charity recognized under
+      Section 501(c)(3) of the Internal Revenue Code. Contributions are
+      tax-deductible to the extent permitted by law.
+    </p>
+
+    <p class="mt-6 text-xs text-ink/60">
+      &copy; {year} Hardcover Foundation.
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,54 @@
+---
+// Contact (docs/phase-2-checklist.md Commit 5, §4/§6). No form, no phone,
+// no address — GitHub Pages is static, so there is no server-side endpoint
+// to receive a submission. Every inquiry purpose routes to the single
+// approved address (approved-contact-information.md); none imply a
+// dedicated program/partnership/media intake line exists yet.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactList from "../components/ContactList.astro";
+
+const email = "info@hardcoverfoundation.org";
+
+const purposes = [
+  "General Questions",
+  "Programs and Community Initiatives",
+  "Volunteering and Mentorship",
+  "Partnerships",
+  "Media",
+];
+---
+
+<BaseLayout
+  title="Contact — Hardcover Foundation"
+  description="Contact Hardcover Foundation at info@hardcoverfoundation.org for general questions, programs, volunteering, mentorship, partnerships, or media inquiries."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Contact"
+    dek="Every inquiry reaches the same team at the same address — there isn't yet a separate line for programs, partnerships, or media."
+  />
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-ink/80">
+        Whatever your question — general, programs and community
+        initiatives, volunteering and mentorship, partnerships, or media —
+        it reaches Hardcover Foundation at the address below.
+      </p>
+
+      <div class="mt-10">
+        <ContactList email={email} purposes={purposes} />
+      </div>
+
+      <p class="mt-10 text-ink/80">
+        Looking to get involved specifically? Visit the{" "}
+        <a
+          href="/get-involved"
+          class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+          >Get Involved page</a
+        >.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,81 @@
+---
+// How We Create Impact (docs/phase-2-checklist.md Commit 4). Source:
+// approved-messaging.md "Community-impact platform positioning" and
+// "Public engagement message." No verified outcome numbers, partners, or
+// participant counts exist, so this page describes the approach/model
+// only — never claimed results. The task-approved impact-model phrases
+// (connecting people, expanding access, sharing knowledge, developing
+// leadership, connecting expertise and resources, turning ideas into
+// action, creating educational and community-centered initiatives) are
+// presented as the model itself, not as achieved outcomes.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+
+const impactModel = [
+  { label: "Connecting people" },
+  { label: "Expanding access" },
+  { label: "Sharing knowledge" },
+  { label: "Developing leadership" },
+  { label: "Connecting expertise and resources" },
+  { label: "Turning ideas into action" },
+  { label: "Creating educational and community-centered initiatives" },
+];
+---
+
+<BaseLayout
+  title="How We Create Impact — Hardcover Foundation"
+  description="Hardcover Foundation connects people, knowledge, resources, and opportunities to educational, cultural, youth-centered, and community-centered initiatives."
+>
+  <PageHero
+    eyebrow="Approach"
+    title="How We Create Impact"
+    dek="Hardcover Foundation connects people, knowledge, resources, and opportunities to educational, cultural, youth-centered, and community-centered initiatives."
+  />
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-lg text-ink/80">
+        Hardcover Foundation is currently completing strategic planning
+        for its programs and partnerships. What follows describes the
+        approach Hardcover is building toward — not confirmed outcomes,
+        partners, or results.
+      </p>
+      <p class="mt-6 text-ink/80">
+        Hardcover Foundation is a platform for people who want to use
+        their gifts, talents, expertise, passions, businesses, or vision
+        to positively impact the community. The Foundation helps people
+        develop ideas, connect with resources, create opportunities, and
+        build initiatives that benefit participants and the communities
+        they serve.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading tone="ink" eyebrow="The Model" title="How This Works" />
+      <div class="mt-10">
+        <EditorialIndex items={impactModel} layout="tags" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto flex max-w-4xl flex-col gap-4 sm:flex-row sm:justify-between">
+      <a
+        href="/approach"
+        class="text-sm font-semibold text-copper-deep underline decoration-copper-deep/40 underline-offset-4 hover:text-ink"
+      >
+        &larr; Back to the Approach overview
+      </a>
+      <a
+        href="/programs"
+        class="text-sm font-semibold text-copper-deep underline decoration-copper-deep/40 underline-offset-4 hover:text-ink"
+      >
+        See where this is headed: Programs &rarr;
+      </a>
+    </div>
+  </section>
+</BaseLayout>

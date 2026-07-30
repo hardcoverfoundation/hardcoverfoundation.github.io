@@ -1,0 +1,36 @@
+---
+interface Stage {
+  letter: string;
+  label: string;
+  description: string;
+  questions?: string[];
+}
+
+interface Props {
+  stages: Stage[];
+  variant?: "condensed" | "full";
+}
+
+const { stages, variant = "condensed" } = Astro.props;
+---
+
+<ol class="grid gap-10 md:grid-cols-4 md:gap-6">
+  {
+    stages.map((stage) => (
+      <li class="border-t-2 border-gold pt-4">
+        <span class="font-display text-3xl font-semibold text-gold">
+          {stage.letter}
+        </span>
+        <p class="mt-2 font-display text-lg text-paper">{stage.label}</p>
+        <p class="mt-2 text-sm text-paper/70">{stage.description}</p>
+        {variant === "full" && stage.questions && (
+          <ul class="mt-4 space-y-1 text-sm text-paper/60">
+            {stage.questions.map((q) => (
+              <li>{q}</li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ol>

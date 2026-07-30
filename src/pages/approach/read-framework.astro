@@ -1,0 +1,164 @@
+---
+// The READ Framework, expanded (docs/phase-2-checklist.md Commit 4).
+// Source: read-framework.md, verbatim guiding questions, literacy-area
+// list under Empower, and the "transformation, not information alone"
+// core principle. Deliberately does not reuse ReadFrameworkSequence.astro
+// (the homepage's condensed 4-column grid) — read-framework.md's own
+// website requirements call for "a condensed homepage version and an
+// expanded dedicated-page version" and warn against "four identical
+// generic cards." This page instead stacks each stage as a full-width,
+// alternating section so Recognize/Empower/Articulate/Develop each get
+// distinct emphasis and content shape, not a repeated card treatment.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import PullQuote from "../../components/PullQuote.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+import { literacyAreaLabels } from "../../lib/programLabels";
+
+const recognizeQuestions = [
+  "Who are you?",
+  "What story are you telling?",
+  "What story has been told about you?",
+  "What experiences and systems have influenced your identity?",
+  "What opportunities and obstacles can you recognize?",
+];
+
+const articulateQuestions = [
+  "Can you communicate your ideas?",
+  "Can you tell your story?",
+  "Can you express your vision?",
+  "Can you advocate for yourself and others?",
+  "Can you influence positive change?",
+];
+
+// Exact order and subset from read-framework.md's Empower section —
+// financial, emotional, digital, cultural, leadership, academic, civic,
+// career-workforce. Communication and self-literacy sit under Articulate
+// and Develop respectively, not here.
+const empowerAreas = [
+  "financial",
+  "emotional",
+  "digital",
+  "cultural",
+  "leadership",
+  "academic",
+  "civic",
+  "career-workforce",
+].map((key) => ({ label: literacyAreaLabels[key] }));
+---
+
+<BaseLayout
+  title="The READ Framework — Hardcover Foundation"
+  description="Recognize, Empower, Articulate, Develop — Hardcover Foundation's central methodology, moving from identity and recognition to empowerment, communication, development, and impact."
+>
+  <PageHero
+    eyebrow="Approach"
+    title="The READ Framework"
+    dek="Hardcover Foundation's central methodology, expanded in full."
+  />
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-lg text-ink/80">
+        READ stands for Recognize, Empower, Articulate, and Develop. The
+        framework moves from identity and recognition, to empowerment
+        through literacy, to articulation and communication, to
+        development and impact.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <SectionHeading
+        chapter="R"
+        eyebrow="Recognize"
+        title="Recognize the power of knowledge and identity."
+      />
+      <p class="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-copper-deep">
+        Guiding questions
+      </p>
+      <ul class="mt-4 space-y-3">
+        {
+          recognizeQuestions.map((question) => (
+            <li class="font-display text-xl text-ink md:text-2xl">
+              {question}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <SectionHeading
+        tone="ink"
+        chapter="E"
+        eyebrow="Empower"
+        title="Empower individuals through literacy in all forms."
+      />
+      <p class="mt-6 text-paper/70">Relevant literacy areas may include:</p>
+      <div class="mt-6">
+        <EditorialIndex items={empowerAreas} layout="tags" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <SectionHeading
+        chapter="A"
+        eyebrow="Articulate"
+        title="Help people articulate ideas, culture, creativity, needs, and vision."
+      />
+      <p class="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-copper-deep">
+        Guiding questions
+      </p>
+      <ul class="mt-4 space-y-3">
+        {
+          articulateQuestions.map((question) => (
+            <li class="font-display text-xl text-ink md:text-2xl">
+              {question}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading
+        tone="ink"
+        chapter="D"
+        eyebrow="Develop"
+        title="Develop minds, communities, initiatives, and future leaders."
+      />
+      <div class="mt-8">
+        <PullQuote
+          tone="ink"
+          quote="Literacy should produce transformation, not information alone."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto flex max-w-4xl flex-col gap-4 sm:flex-row sm:justify-between">
+      <a
+        href="/approach"
+        class="text-sm font-semibold text-copper-deep underline decoration-copper-deep/40 underline-offset-4 hover:text-ink"
+      >
+        &larr; Back to the Approach overview
+      </a>
+      <a
+        href="/approach/how-we-create-impact"
+        class="text-sm font-semibold text-copper-deep underline decoration-copper-deep/40 underline-offset-4 hover:text-ink"
+      >
+        Continue to How We Create Impact &rarr;
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+// Lists inquiry purposes that all route to one email address — not a form.
+// GitHub Pages serves static files only, so there is no server-side
+// endpoint to receive a form POST (docs/phase-2-checklist.md §6). Email and
+// purposes are required props; this component holds no contact data
+// itself. No <form> element, no form-service script, no client-side API
+// key. Each purpose gets a distinct mailto subject line (not fabricated
+// message content, just the purpose label) so recipients see intent at a
+// glance; every subject still resolves to the same single address.
+interface Props {
+  email: string;
+  purposes?: string[];
+}
+
+const { email, purposes = [] } = Astro.props;
+const mailto = `mailto:${email}`;
+const mailtoWithSubject = (purpose: string) =>
+  `${mailto}?subject=${encodeURIComponent(purpose)}`;
+---
+
+<div>
+  <p class="font-display text-2xl text-ink md:text-3xl">
+    <a
+      href={mailto}
+      class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+    >
+      {email}
+    </a>
+  </p>
+  {
+    purposes.length > 0 && (
+      <ul class="mt-8 flex flex-col gap-1 border-t border-ink/10 pt-6">
+        {purposes.map((purpose) => (
+          <li>
+            <a
+              href={mailtoWithSubject(purpose)}
+              class="flex min-h-[44px] items-center text-ink/80 hover:text-copper-deep"
+            >
+              {purpose}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>

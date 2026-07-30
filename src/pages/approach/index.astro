@@ -1,0 +1,150 @@
+---
+// Approach landing page + Expanded Literacy (docs/phase-2-checklist.md
+// Commit 4). Per the approved 4-route structure, this single page serves
+// both roles: it introduces Hardcover's overall methodology and functions
+// as the substantive Expanded Literacy content, then links out to
+// /approach/read-framework and /approach/how-we-create-impact.
+// Source: expanded-literacy.md ("Foundational idea," "Suggested public
+// explanation," "Potential literacy areas," "Website presentation
+// guidance") and approved-messaging.md ("Core distinction"). Does not
+// claim curricula, workshops, classes, instructors, schedules, or
+// participants for any literacy area.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PullQuote from "../../components/PullQuote.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+import { literacyAreaLabels } from "../../lib/programLabels";
+
+const literacyProgression = [
+  {
+    label: "Reading Words",
+    description:
+      "Traditional literacy: comprehension, vocabulary, and fluency remain the foundation everything else builds on.",
+  },
+  {
+    label: "Reading Rooms and People",
+    description:
+      "Context, body language, culture, and relationships — reading the people and situations around you.",
+  },
+  {
+    label: "Reading Opportunity and Systems",
+    description:
+      "Contracts, finances, institutions, and playbooks — the systems that shape opportunity.",
+  },
+  {
+    label: "Reading Yourself",
+    description:
+      "Identity, purpose, growth, and leadership — the ability to interpret your own story.",
+  },
+];
+
+// Short, general descriptions grounded in expanded-literacy.md's
+// foundational idea and approved-messaging.md's core distinction — not
+// curricula, outcomes, or claims that a program exists in every category.
+const literacyAreaDescriptions: Record<string, string> = {
+  academic: "Building on traditional educational foundations.",
+  financial: "Understanding money, contracts, and financial systems.",
+  emotional: "Understanding and communicating emotions and relationships.",
+  digital: "Navigating technology and digital systems with confidence.",
+  cultural: "Understanding culture, community, and the people around you.",
+  leadership: "Developing the character and capacity to lead.",
+  civic: "Understanding civic systems and participating in community life.",
+  "career-workforce": "Reading opportunity, playbooks, and the world of work.",
+  communication: "Articulating ideas, stories, and vision clearly.",
+  self: "Understanding identity, purpose, and personal growth.",
+};
+
+const literacyAreas = Object.entries(literacyAreaLabels).map(([key, label]) => ({
+  label,
+  description: literacyAreaDescriptions[key],
+}));
+---
+
+<BaseLayout
+  title="Expanded Literacy — Hardcover Foundation"
+  description="Literacy is more than recognizing words on a page. It is the ability to interpret information, understand context, communicate clearly, recognize opportunity, and respond thoughtfully to the world around you."
+>
+  <PageHero
+    eyebrow="Approach"
+    title="Expanded Literacy"
+    dek="Literacy is more than recognizing words on a page. It is the ability to interpret information, understand context, communicate clearly, recognize opportunity, and respond thoughtfully to the world around you."
+  />
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <PullQuote
+        tone="ink"
+        quote="Most organizations focus on reading books. Hardcover focuses on reading life."
+      />
+      <p class="mt-8 text-paper/70">
+        Traditional reading remains essential. Hardcover builds on it by
+        helping people interpret themselves, relationships, institutions,
+        culture, opportunities, and the systems around them.
+      </p>
+      <p class="mt-6 text-sm text-paper/60">
+        Hardcover puts this belief into practice through the{" "}
+        <a href="/approach/read-framework" class="underline decoration-paper/40 underline-offset-4 hover:text-gold">READ Framework</a>,
+        and applies it in the community through Hardcover's approach to{" "}
+        <a href="/approach/how-we-create-impact" class="underline decoration-paper/40 underline-offset-4 hover:text-gold">creating impact</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="A Progression" title="From Books to Self, Community, and Opportunity" />
+      <div class="mt-10">
+        <EditorialIndex items={literacyProgression} layout="progression" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <SectionHeading eyebrow="Areas of Understanding" title="Potential Literacy Areas" />
+      <p class="mt-4 max-w-2xl text-ink/70">
+        These are strategic content directions Hardcover is building
+        toward — not a claim that a formal program currently exists in
+        every category.
+      </p>
+      <div class="mt-10">
+        <EditorialIndex items={literacyAreas} layout="grid" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="font-display text-2xl font-semibold text-ink md:text-3xl">
+        Continue Exploring the Approach
+      </h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        <a
+          href="/approach/read-framework"
+          class="group border-t-2 border-copper-deep pt-4 hover:border-ink"
+        >
+          <span class="font-display text-xl font-semibold text-ink group-hover:text-copper-deep">
+            The READ Framework
+          </span>
+          <span class="mt-2 block text-ink/70">
+            The methodology Hardcover uses to move from identity and
+            recognition to empowerment, communication, and development.
+          </span>
+        </a>
+        <a
+          href="/approach/how-we-create-impact"
+          class="group border-t-2 border-copper-deep pt-4 hover:border-ink"
+        >
+          <span class="font-display text-xl font-semibold text-ink group-hover:text-copper-deep">
+            How We Create Impact
+          </span>
+          <span class="mt-2 block text-ink/70">
+            The community-impact model Hardcover is building — and where
+            that work stands today.
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,75 @@
+---
+import Logo from "./Logo.astro";
+import { donateUrl, newsletterSignupUrl } from "../site.config";
+import { primaryNav, isActiveRoute } from "../lib/navigation";
+
+// The header CTA only appears once a real high-intent action is
+// configured — "Get Involved" already covers general participation as a
+// plain nav link, so there is no #get-involved fallback for this button;
+// with nothing configured, it renders nothing at all (see below).
+const canGive = Boolean(donateUrl || newsletterSignupUrl);
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3 md:py-5">
+    <Logo />
+
+    <button
+      type="button"
+      id="nav-toggle"
+      class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-ink md:hidden"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+    >
+      <span class="sr-only">Toggle menu</span>
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"></path>
+      </svg>
+    </button>
+
+    <nav
+      id="primary-nav"
+      aria-label="Primary"
+      class="hidden w-full basis-full flex-col gap-4 md:flex md:w-auto md:basis-auto md:flex-row md:items-center md:gap-8"
+    >
+      {
+        primaryNav.map((link) => {
+          const active = isActiveRoute(currentPath, link.href);
+          return (
+            <a
+              class={`min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep ${active ? "font-semibold text-copper-deep" : ""}`}
+              href={link.href}
+              aria-current={active ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+      {
+        canGive && (
+          <a
+            class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-copper-deep px-5 text-sm font-semibold text-paper hover:bg-ink"
+            href="#give"
+          >
+            Give
+          </a>
+        )
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("primary-nav");
+
+  toggle?.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    nav?.classList.toggle("hidden");
+    nav?.classList.toggle("flex");
+  });
+</script>

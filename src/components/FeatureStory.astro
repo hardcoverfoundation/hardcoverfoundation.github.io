@@ -1,0 +1,31 @@
+---
+// Same no-markup-when-absent pattern as StatBand.astro — no approved
+// story exists yet, so this is a no-op on the homepage today.
+interface Story {
+  title: string;
+  excerpt: string;
+  href: string;
+}
+
+interface Props {
+  story?: Story;
+}
+
+const { story } = Astro.props;
+---
+
+{
+  story && (
+    <section aria-labelledby="feature-story-heading" class="bg-paper px-5 py-20">
+      <div class="mx-auto max-w-3xl">
+        <h2 id="feature-story-heading" class="font-display text-3xl font-semibold text-ink">
+          {story.title}
+        </h2>
+        <p class="mt-4 text-lg text-ink/75">{story.excerpt}</p>
+        <a class="mt-6 inline-block text-sm font-semibold text-copper-deep" href={story.href}>
+          Read the story
+        </a>
+      </div>
+    </section>
+  )
+}

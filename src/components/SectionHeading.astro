@@ -1,0 +1,29 @@
+---
+interface Props {
+  chapter?: string;
+  eyebrow?: string;
+  title: string;
+  id?: string;
+  tone?: "ink" | "paper";
+}
+
+const { chapter, eyebrow, title, id, tone = "paper" } = Astro.props;
+---
+
+<div id={id} class="scroll-mt-24">
+  {
+    (chapter || eyebrow) && (
+      <p
+        class={`font-display text-sm uppercase tracking-[0.25em] ${tone === "ink" ? "text-gold" : "text-copper-deep"}`}
+      >
+        {chapter && <span>{chapter} — </span>}
+        {eyebrow}
+      </p>
+    )
+  }
+  <h2
+    class={`mt-3 font-display text-3xl font-semibold md:text-4xl ${tone === "ink" ? "text-paper" : "text-ink"}`}
+  >
+    {title}
+  </h2>
+</div>

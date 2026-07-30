@@ -1,0 +1,30 @@
+---
+// Isolated so the mark can be replaced without touching Header or Footer
+// layout. Renders the one approved logo asset (public/assets/hardcover-
+// logo.png, byte-identical to favicon.svg — see docs/design-plan.md §1) as
+// the complete brand lockup. The artwork already contains the "HARDCOVER"
+// wordmark, so no separate HTML wordmark is rendered beside it.
+//
+// Native asset is 466x88px (~5.3:1 aspect ratio, alpha-transparent, no
+// internal padding to speak of — the mark fills the canvas edge to edge).
+// Width below preserves that ratio via `h-auto`.
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Hardcover Foundation — home"
+  class:list={["inline-flex shrink-0 items-center", className]}
+>
+  <img
+    src="/assets/hardcover-logo.png"
+    alt="Hardcover Foundation"
+    width="466"
+    height="88"
+    class="h-auto w-[clamp(145px,42vw,175px)] md:w-[clamp(180px,14vw,220px)]"
+  />
+</a>

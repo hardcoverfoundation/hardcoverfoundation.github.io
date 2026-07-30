@@ -1,0 +1,85 @@
+---
+// Accessibility Statement (docs/phase-2-checklist.md Commit 6, §3/§9/§11).
+//
+// No dedicated source document; built from the WCAG 2.2 AA target and
+// technical commitments already stated in CLAUDE.md and docs/design-plan.md
+// §10. Uses restrained, aspirational language ("aims to provide... working
+// toward alignment with... practices") and current measures only — no
+// compliance, conformance-level, certification, or third-party-audit claim,
+// since none has been tested or performed. Proposed draft copy requiring
+// Foundation leadership review before production launch (see
+// docs/policy-review-notes.md).
+import ProsePage from "../layouts/ProsePage.astro";
+
+const email = "info@hardcoverfoundation.org";
+---
+
+<ProsePage
+  title="Accessibility Statement — Hardcover Foundation"
+  description="Hardcover Foundation's approach to building an accessible website, and how to report a barrier."
+  eyebrow="Legal"
+  heroTitle="Accessibility Statement"
+  dek="Last updated: July 30, 2026"
+>
+  <p>
+    Hardcover Foundation aims to provide a website that is accessible to as
+    many visitors as possible, including people who use assistive
+    technology. This page describes the approach taken in building this
+    site and how to report a problem.
+  </p>
+
+  <h2>Our target</h2>
+  <p>
+    Hardcover Foundation aims to provide an accessible website and is
+    working toward alignment with Web Content Accessibility Guidelines
+    (WCAG) 2.2 Level AA practices. This is an aspirational goal, not a
+    claim of compliance, certification, or a completed third-party audit,
+    and it is not a guarantee that the website is accessible to every
+    visitor or assistive technology.
+  </p>
+  <p>
+    We continue to review the website's structure, navigation, contrast,
+    responsive behavior, keyboard access, and content presentation as the
+    site develops.
+  </p>
+
+  <h2>Current measures</h2>
+  <p>Measures already built into this site include:</p>
+  <ul>
+    <li>semantic page structure, including landmark regions and headings in a logical order</li>
+    <li>keyboard-operable navigation, including a skip-to-content link</li>
+    <li>visible focus indicators on links and other interactive elements</li>
+    <li>responsive layouts that adapt to different screen sizes and zoom levels</li>
+    <li>readable text and background color contrast</li>
+    <li>descriptive link text rather than generic phrases like "click here"</li>
+    <li>support for visitors who have requested reduced motion in their operating system</li>
+    <li>text alternatives for meaningful images</li>
+  </ul>
+
+  <h2>Known limitations</h2>
+  <p>
+    Accessibility work on this website is ongoing. If you encounter
+    content, a feature, or a page that is difficult to access, we want to
+    know about it.
+  </p>
+
+  <h2>Reporting a barrier</h2>
+  <p>
+    If you experience an accessibility barrier anywhere on this website,
+    please email{" "}
+    <a
+      href={`mailto:${email}`}
+      class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+      >{email}</a
+    >{" "}with a description of the issue and the page where you found it.
+    We review reports as they come in, though we are not able to commit to
+    a specific response time or remediation deadline in this statement.
+  </p>
+
+  <h2>Changes to this statement</h2>
+  <p>
+    This statement may be updated as the website's design, development, or
+    accessibility practices change. The date at the top of this page
+    reflects the most recent update.
+  </p>
+</ProsePage>

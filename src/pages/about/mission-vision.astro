@@ -1,0 +1,70 @@
+---
+// Mission and vision, verbatim per approved-messaging.md — not rewritten,
+// shortened, or embellished (docs/phase-2-checklist.md Commit 3).
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PullQuote from "../../components/PullQuote.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+
+const desiredOutcomes = [
+  { label: "Build leaders" },
+  { label: "Strengthen communities" },
+  { label: "Expand access" },
+  { label: "Connect knowledge and resources" },
+  { label: "Create pathways to success" },
+  { label: "Turn ideas into action" },
+  { label: "Produce sustainable community impact" },
+];
+---
+
+<BaseLayout
+  title="Mission and Vision — Hardcover Foundation"
+  description="Uniting and empowering communities through connection, access, and shared knowledge, creating pathways to opportunity, growth, and purpose."
+>
+  <PageHero eyebrow="About" title="Mission and Vision" />
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto grid max-w-6xl gap-12 md:grid-cols-2">
+      <div>
+        <h2 class="font-display text-sm uppercase tracking-[0.25em] text-copper-deep">
+          Mission
+        </h2>
+        <div class="mt-4">
+          <PullQuote
+            quote="Uniting and empowering communities through connection, access, and shared knowledge, creating pathways to opportunity, growth, and purpose."
+          />
+        </div>
+      </div>
+      <div class="border-t border-ink/10 pt-8 md:border-l md:border-t-0 md:pl-12 md:pt-0">
+        <h2 class="font-display text-sm uppercase tracking-[0.25em] text-copper-deep">
+          Vision
+        </h2>
+        <div class="mt-4">
+          <PullQuote quote="Unlocking Human Potential to Change the World." />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-lg text-ink/80">
+        The mission describes the work Hardcover Foundation does now:
+        uniting and empowering communities through connection, access, and
+        shared knowledge. The vision describes the larger change that work is
+        meant to produce.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="font-display text-2xl font-semibold text-ink md:text-3xl">
+        What This Looks Like
+      </h2>
+      <div class="mt-8">
+        <EditorialIndex items={desiredOutcomes} layout="tags" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
