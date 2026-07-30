@@ -1,0 +1,83 @@
+---
+// Layout (not a component, per docs/phase-2-checklist.md §2) for long-form,
+// paragraph-heavy prose — /privacy, /terms, /accessibility, and the legal
+// portions of /about/governance. Neither tokens.css nor global.css style
+// prose beyond individual homepage sections, so this defines a standalone
+// heading/paragraph/list scale for slotted content instead.
+//
+// Wraps BaseLayout and renders PageHero for the page's <h1>, so slotted
+// content should start at <h2> to keep heading order intact.
+import BaseLayout from "./BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  heroTitle?: string;
+  dek?: string;
+}
+
+const { title, description, eyebrow, heroTitle, dek } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow={eyebrow} title={heroTitle ?? title} dek={dek} />
+  <div class="prose-content mx-auto max-w-3xl px-5 py-16 md:py-20">
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .prose-content :global(h2) {
+    margin-top: 2.5rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .prose-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose-content :global(h3) {
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .prose-content :global(p) {
+    margin-top: 1rem;
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--ink) 80%, transparent);
+  }
+
+  .prose-content :global(ul),
+  .prose-content :global(ol) {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--ink) 80%, transparent);
+  }
+
+  .prose-content :global(ul) {
+    list-style: disc;
+  }
+
+  .prose-content :global(ol) {
+    list-style: decimal;
+  }
+
+  .prose-content :global(li + li) {
+    margin-top: 0.5rem;
+  }
+
+  .prose-content :global(a) {
+    text-underline-offset: 2px;
+  }
+</style>

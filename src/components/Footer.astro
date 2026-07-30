@@ -1,16 +1,24 @@
 ---
 import Logo from "./Logo.astro";
+import { primaryNav, isActiveRoute } from "../lib/navigation";
 
 const year = new Date().getFullYear();
 
-// "subscribe," never "join" — CLAUDE.md: the corporation has no statutory
-// members and public copy must not imply membership status.
-const footerLinks = [
-  { href: "#approach", label: "Approach" },
-  { href: "#programs", label: "Programs" },
-  { href: "#get-involved", label: "Get Involved" },
-  { href: "#credibility", label: "Governance" },
-];
+// Reuses the same route data as Header.astro (src/lib/navigation.ts) so the
+// footer can't drift onto a different set of hrefs for the same sections.
+// Only the routes that exist as of Commit 2 are pulled in here; Contact is
+// left to the header/contact page rather than duplicated in the footer.
+const footerRouteLabels = ["Approach", "Programs", "Get Involved"];
+const footerRouteLinks = primaryNav.filter((link) =>
+  footerRouteLabels.includes(link.label),
+);
+
+// "/about/governance" doesn't exist until a later Phase 2 commit, so
+// Governance stays pointed at the homepage's own governance section for
+// now rather than linking to a route that isn't built yet.
+const governanceLink = { href: "#credibility", label: "Governance" };
+
+const currentPath = Astro.url.pathname;
 ---
 
 <footer class="border-t border-ink/10 bg-paper-dim">
@@ -20,15 +28,25 @@ const footerLinks = [
 
       <nav aria-label="Footer" class="flex flex-col gap-3 md:flex-row md:gap-8">
         {
-          footerLinks.map((link) => (
-            <a
-              class="min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep"
-              href={link.href}
-            >
-              {link.label}
-            </a>
-          ))
+          footerRouteLinks.map((link) => {
+            const active = isActiveRoute(currentPath, link.href);
+            return (
+              <a
+                class={`min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep ${active ? "font-semibold text-copper-deep" : ""}`}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            );
+          })
         }
+        <a
+          class="min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep"
+          href={governanceLink.href}
+        >
+          {governanceLink.label}
+        </a>
       </nav>
     </div>
 

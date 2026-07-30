@@ -1,0 +1,28 @@
+---
+// Renders name + title pairs only. No bio, headshot, initials-as-portrait,
+// credential, employer, quote, or profile-link slot exists on this
+// component — structurally absent, not just unused, per
+// approved-board-information.md's publishing restrictions. Data is a
+// required prop; this component holds no board data itself.
+interface Member {
+  name: string;
+  title: string;
+}
+
+interface Props {
+  members: Member[];
+}
+
+const { members } = Astro.props;
+---
+
+<ul class="divide-y divide-ink/10 border-y border-ink/10">
+  {
+    members.map((member) => (
+      <li class="flex flex-col gap-1 py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+        <span class="font-display text-lg text-ink">{member.name}</span>
+        <span class="text-sm font-medium text-copper-deep">{member.title}</span>
+      </li>
+    ))
+  }
+</ul>
