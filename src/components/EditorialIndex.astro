@@ -6,7 +6,7 @@ interface IndexItem {
 
 interface Props {
   items: IndexItem[];
-  layout?: "progression" | "tags";
+  layout?: "progression" | "tags" | "grid";
 }
 
 const { items, layout = "progression" } = Astro.props;
@@ -27,6 +27,17 @@ const { items, layout = "progression" } = Astro.props;
         </li>
       ))}
     </ol>
+  ) : layout === "grid" ? (
+    <ul class="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      {items.map((item) => (
+        <li class="border-l-2 border-copper-deep/40 pl-4">
+          <p class="font-display text-lg text-ink">{item.label}</p>
+          {item.description && (
+            <p class="mt-1 text-sm text-ink/70">{item.description}</p>
+          )}
+        </li>
+      ))}
+    </ul>
   ) : (
     <ul class="flex flex-wrap gap-3">
       {items.map((item) => (

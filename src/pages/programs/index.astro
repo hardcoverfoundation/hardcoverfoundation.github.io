@@ -1,0 +1,102 @@
+---
+// Programs overview (docs/phase-2-checklist.md Commit 4, §8). Renders the
+// ten literacy-area taxonomy (content.config.ts / programLabels.ts) and
+// the homepage's broader Areas of Focus set as categories/strategic
+// directions only — never as active program entries. src/content/programs
+// stays empty (only .gitkeep) through this commit; no sample/test entry
+// is created to exercise the [...slug] template.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+import { literacyAreaLabels } from "../../lib/programLabels";
+
+// Same broader set as the homepage's "Areas of Focus" section — reused
+// deliberately (Phase 2 homepage-duplication is expected by design until
+// Commit 7's integration pass, docs/phase-2-checklist.md §12).
+const areasOfFocus = [
+  { label: "Education and Youth Development" },
+  { label: "Mentorship and Leadership" },
+  { label: "Arts, Culture, and Storytelling" },
+  { label: "Workforce and Financial Readiness" },
+  { label: "Athletics, Movement, and Wellness" },
+  { label: "Entrepreneurship and Community Innovation" },
+];
+
+const literacyAreas = Object.values(literacyAreaLabels).map((label) => ({
+  label,
+}));
+---
+
+<BaseLayout
+  title="Programs — Hardcover Foundation"
+  description="Hardcover Foundation is developing community-centered initiatives grounded in expanded literacy, leadership, mentorship, culture, creativity, wellness, workforce development, and opportunity."
+>
+  <PageHero
+    eyebrow="Programs"
+    title="Programs"
+    dek="Hardcover Foundation is developing community-centered initiatives grounded in expanded literacy, leadership, mentorship, culture, creativity, wellness, workforce development, and opportunity."
+  />
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-lg text-ink/80">
+        Hardcover Foundation's programs and partnerships are currently in
+        strategic development. No active programs exist yet — specific
+        initiatives will appear here once they are confirmed.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading eyebrow="Where This Work Is Headed" title="Strategic Areas of Focus" />
+      <div class="mt-12 grid gap-12 md:grid-cols-2">
+        <div>
+          <h3 class="font-display text-lg font-semibold text-ink">
+            Areas of Focus
+          </h3>
+          <p class="mt-2 max-w-md text-sm text-ink/70">
+            Broad areas of focus where the Hardcover approach can be
+            applied — future and developing programming directions, not
+            verified active programs.
+          </p>
+          <div class="mt-6">
+            <EditorialIndex items={areasOfFocus} layout="tags" />
+          </div>
+        </div>
+        <div class="border-t border-ink/10 pt-8 md:border-l md:border-t-0 md:pl-12 md:pt-0">
+          <h3 class="font-display text-lg font-semibold text-ink">
+            Grounded in Expanded Literacy
+          </h3>
+          <p class="mt-2 max-w-md text-sm text-ink/70">
+            Strategic content directions, not a claim that a formal
+            program currently exists in every category. Read more about{" "}
+            <a
+              href="/approach"
+              class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+              >Hardcover's approach to expanded literacy</a
+            >.
+          </p>
+          <div class="mt-6">
+            <EditorialIndex items={literacyAreas} layout="tags" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-ink/80">
+        Specific programs will appear on this page once they are
+        confirmed. In the meantime, read about{" "}
+        <a
+          href="/approach/how-we-create-impact"
+          class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+          >how Hardcover creates impact</a
+        >.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
