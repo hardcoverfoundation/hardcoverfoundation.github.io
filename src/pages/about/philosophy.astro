@@ -1,0 +1,54 @@
+---
+// The Hardcover Philosophy (docs/phase-2-checklist.md Commit 3). Source:
+// approved-messaging.md "Hardcover philosophy" — verbatim reflective
+// question and qualities list, presented as an invitation to reflection,
+// growth, purpose, and leadership, not as moral judgment.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PullQuote from "../../components/PullQuote.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+
+const qualities = [
+  { label: "Leadership" },
+  { label: "Character" },
+  { label: "Integrity" },
+  { label: "Resilience" },
+  { label: "Innovation" },
+  { label: "Service" },
+];
+---
+
+<BaseLayout
+  title="The Hardcover Philosophy — Hardcover Foundation"
+  description="Our lives are books that will be read by many."
+>
+  <PageHero eyebrow="About" title="The Hardcover Philosophy" />
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <PullQuote tone="ink" quote="Our lives are books that will be read by many." />
+      <p class="mt-8 font-display text-xl text-paper/80">
+        When people read your life, what do they get?
+      </p>
+      <p class="mt-4 text-sm text-paper/60">
+        An invitation to reflection, growth, purpose, and leadership — not a
+        judgment.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="font-display text-2xl font-semibold text-ink md:text-3xl">
+        Qualities Worth Reflecting On
+      </h2>
+      <p class="mt-4 max-w-2xl text-ink/70">
+        The reflective question can surface qualities such as these — an
+        invitation, not a checklist to be judged against.
+      </p>
+      <div class="mt-8">
+        <EditorialIndex items={qualities} layout="tags" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

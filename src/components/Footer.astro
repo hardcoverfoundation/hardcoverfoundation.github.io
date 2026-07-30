@@ -13,12 +13,12 @@ const footerRouteLinks = primaryNav.filter((link) =>
   footerRouteLabels.includes(link.label),
 );
 
-// "/about/governance" doesn't exist until a later Phase 2 commit, so
-// Governance stays pointed at the homepage's own governance section for
-// now rather than linking to a route that isn't built yet.
-const governanceLink = { href: "#credibility", label: "Governance" };
+// "/about/governance" now exists (Phase 2 Commit 3), so Governance points
+// at the real route instead of the homepage's inline anchor.
+const governanceLink = { href: "/about/governance", label: "Governance" };
 
 const currentPath = Astro.url.pathname;
+const governanceActive = isActiveRoute(currentPath, governanceLink.href);
 ---
 
 <footer class="border-t border-ink/10 bg-paper-dim">
@@ -42,8 +42,9 @@ const currentPath = Astro.url.pathname;
           })
         }
         <a
-          class="min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep"
+          class={`min-h-[44px] flex items-center text-sm font-medium text-ink hover:text-copper-deep ${governanceActive ? "font-semibold text-copper-deep" : ""}`}
           href={governanceLink.href}
+          aria-current={governanceActive ? "page" : undefined}
         >
           {governanceLink.label}
         </a>

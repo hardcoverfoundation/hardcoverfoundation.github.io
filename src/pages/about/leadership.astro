@@ -1,0 +1,51 @@
+---
+// Leadership and Board (docs/phase-2-checklist.md Commit 3). Source:
+// approved-board-information.md — names and titles only. No biography,
+// headshot, initials-as-portrait, credential, employer information,
+// committee assignment, quotation, or profile link anywhere on this page;
+// LeadershipList.astro has no slot for any of those fields to begin with.
+// "Board of Directors," never "members" — the corporation has no statutory
+// members (CLAUDE.md).
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import LeadershipList from "../../components/LeadershipList.astro";
+
+const boardOfDirectors = [
+  { name: "Horace Allen", title: "President" },
+  { name: "Damon Thompson Sr.", title: "Vice President" },
+  { name: "Brittany Johnson", title: "Secretary" },
+  { name: "Xavier Lee", title: "Treasurer" },
+];
+---
+
+<BaseLayout
+  title="Leadership and Board — Hardcover Foundation"
+  description="The Board of Directors that governs Hardcover Foundation."
+>
+  <PageHero eyebrow="About" title="Leadership and Board" />
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-lg text-ink/80">
+        Hardcover Foundation is governed by a Board of Directors. The
+        corporation has no statutory members.
+      </p>
+
+      <h2 class="mt-12 font-display text-2xl font-semibold text-ink md:text-3xl">
+        Board of Directors
+      </h2>
+      <div class="mt-8">
+        <LeadershipList members={boardOfDirectors} />
+      </div>
+
+      <p class="mt-8 text-ink/70">
+        Read more about Hardcover Foundation's
+        <a
+          href="/about/governance"
+          class="underline decoration-ink/30 underline-offset-4 hover:text-copper-deep"
+          >governance and legal structure</a
+        >.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+// What Makes Hardcover Different (docs/phase-2-checklist.md Commit 3).
+// Source: approved-messaging.md "Core distinction" + expanded-literacy.md.
+// Builds on traditional literacy rather than dismissing books or reading
+// education; does not claim curricula, workshops, classes, or programs
+// currently operate in each literacy category.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PullQuote from "../../components/PullQuote.astro";
+import EditorialIndex from "../../components/EditorialIndex.astro";
+
+const waysToRead = [
+  { label: "Books" },
+  { label: "Rooms" },
+  { label: "People" },
+  { label: "Body Language" },
+  { label: "Opportunities" },
+  { label: "Financial Statements" },
+  { label: "Contracts" },
+  { label: "Playbooks" },
+  { label: "Systems" },
+  { label: "Culture" },
+  { label: "Themselves" },
+];
+---
+
+<BaseLayout
+  title="What Makes Hardcover Different — Hardcover Foundation"
+  description="Most organizations focus on reading books. Hardcover focuses on reading life."
+>
+  <PageHero eyebrow="About" title="What Makes Hardcover Different" />
+
+  <section class="bg-ink px-5 py-16 text-paper md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <PullQuote
+        tone="ink"
+        quote="Most organizations focus on reading books. Hardcover focuses on reading life."
+      />
+    </div>
+  </section>
+
+  <section class="bg-paper px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-lg text-ink/80">
+        Hardcover believes literacy extends beyond phonetics and
+        comprehension. Literacy is the ability to accurately interpret,
+        understand, and respond to the world around you.
+      </p>
+      <p class="mt-6 text-ink/80">
+        Traditional reading remains essential. Hardcover builds on it by
+        helping people interpret themselves, relationships, institutions,
+        culture, opportunities, and the systems around them.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper-dim px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="font-display text-2xl font-semibold text-ink md:text-3xl">
+        People Must Learn How to Read
+      </h2>
+      <p class="mt-4 max-w-2xl text-ink/70">
+        The inability to accurately understand any of these areas can limit
+        a person's future.
+      </p>
+      <div class="mt-8">
+        <EditorialIndex items={waysToRead} layout="tags" />
+      </div>
+      <p class="mt-8 max-w-2xl text-sm text-ink/60">
+        These are areas Hardcover is building toward through its literacy
+        work — not a list of curricula, workshops, or classes currently
+        operating in each category.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
